@@ -1507,6 +1507,69 @@
       .r02-dark .trails-controls-row { gap:8px; }
       .r02-dark .trails-btn { padding:0 12px; }
     }
+
+    /* R03: plum evening, candy-colour toy houses and a tactile yellow letter tile. */
+    body.r03-theme { background:#27113F; }
+    .r03-theme .panel { background:#34164F; border:2px solid #75508D; color:#FFF8F1; }
+    .r03-theme .panel-header h2 { color:#FFF5FC; }
+    .buddy-stage { position:relative; overflow:hidden; isolation:isolate; padding:22px 20px 24px; border-radius:28px; background:radial-gradient(ellipse at 50% 25%,#643A85 0%,#3A205D 55%,#291743 100%); border:2px solid #9364A8; box-shadow:inset 0 1px 0 #FFFFFF33,0 16px 30px #160A2944; }
+    .buddy-stage::before { content:""; position:absolute; z-index:-1; width:115%; height:190px; left:-7%; top:280px; border-radius:50%; background:#5C3B78; box-shadow:0 18px 0 #493162; opacity:.65; pointer-events:none; }
+    .buddy-heading { text-align:center; }
+    .buddy-eyebrow { font-size:.7rem; letter-spacing:.18em; font-weight:800; color:#EDC1FC; }
+    .buddy-heading h3 { font-family:'Fredoka',sans-serif; font-size:clamp(1.25rem,3.7vw,1.8rem); line-height:1.25; color:#FFF3D8; margin:8px 0 16px; }
+    .buddy-mode { display:inline-flex; gap:4px; padding:5px; border:1px solid #B183C266; background:#241337; border-radius:18px; }
+    .buddy-mode button { border:0; border-radius:13px; min-height:44px; padding:8px 17px; background:transparent; color:#E7CFF4; font:800 .95rem 'Nunito',sans-serif; cursor:pointer; }
+    .buddy-mode button[aria-pressed="true"] { background:#F9C955; color:#47254F; box-shadow:0 3px 0 #A66F2D; }
+    .buddy-score { display:flex; align-items:center; justify-content:space-between; max-width:640px; margin:20px auto 12px; color:#FFF2E9; font-size:.95rem; gap:10px; }
+    .buddy-score strong { color:#FFDC79; padding-left:6px; }
+    .buddy-star { display:inline-block; color:#6B527E; font-size:1.5rem; line-height:1; margin-left:3px; }
+    .buddy-star.lit { color:#FFE073; filter:drop-shadow(0 2px 0 #B8813A); }
+    .buddy-feedback { min-height:60px; max-width:640px; display:flex; align-items:center; justify-content:center; margin:0 auto; text-align:center; padding:10px 16px; border:1px solid #AD85C55C; background:#25143F99; border-radius:16px; color:#FFF2F8; font-weight:750; line-height:1.4; }
+    .buddy-feedback.retry { border-color:#FFC173; color:#FFE0AE; }
+    .buddy-feedback.success { border-color:#85F0B5; color:#C1FFDB; }
+    .buddy-village { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); align-items:end; gap:12px; max-width:750px; margin:22px auto 0; }
+    .buddy-house { position:relative; display:block; width:100%; border:0; padding:0; background:transparent; cursor:pointer; border-radius:22px; transition:transform .16s ease,filter .16s ease; -webkit-tap-highlight-color:transparent; }
+    .buddy-house:focus-visible { outline:4px solid #FFF299; outline-offset:2px; }
+    .buddy-house:not(:disabled):hover,.buddy-house.drop-hover { transform:translateY(-7px); filter:drop-shadow(0 0 9px #FFDF7399); }
+    .buddy-house:disabled { cursor:default; opacity:1; }
+    .buddy-house-art { display:block; width:100%; height:auto; overflow:visible; }
+    .buddy-door-letter { position:absolute; left:38%; top:57%; width:24%; text-align:center; font-family:'Fredoka',sans-serif; font-weight:600; font-size:clamp(2rem,5.7vw,3.8rem); line-height:1; color:#482D50; text-shadow:0 1px 0 #FFFFFF88; pointer-events:none; }
+    .buddy-door-letter.paired { top:41%; left:32%; width:36%; font-size:clamp(1rem,3vw,1.6rem); color:#FFFFFF; background:#57356D; padding:4px; border:2px solid #FFE6AF; border-radius:12px; text-shadow:none; }
+    .buddy-open-badge { position:absolute; left:50%; bottom:0; transform:translateX(-50%); white-space:nowrap; font-weight:900; font-size:.85rem; background:#C1FBDD; color:#215B47; border:2px solid #F2FFF7; border-radius:30px; padding:4px 13px; box-shadow:0 4px 0 #213D3E55; }
+    .buddy-friend { transform-origin:120px 250px; animation:buddyHello .45s ease-out; }
+    @keyframes buddyHello { from {transform:translateY(12px) scale(.85); opacity:0;} to {transform:none;opacity:1;} }
+    .buddy-token-tray { margin:20px auto 0; display:flex; min-height:135px; align-items:center; justify-content:center; gap:24px; padding:16px; max-width:580px; border:1px solid #B390C666; border-radius:24px; background:#21113799; box-shadow:inset 0 2px 8px #16072466; }
+    .buddy-tray-caption { color:#E5C9F2; font-weight:800; max-width:100px; }
+    .buddy-tray-dots { color:#A983B9; letter-spacing:.15em; }
+    .buddy-token,.buddy-drag-ghost { display:flex; align-items:center; justify-content:center; width:94px; height:98px; flex-shrink:0; border-radius:24px; border:3px solid #FFF1B9; background:linear-gradient(145deg,#FFF39D,#FFD855 55%,#F7AA3D); box-shadow:inset 0 3px 0 #FFFBD3,0 7px 0 #BE762D,0 12px 20px #16092D66; color:#563155; font:600 3.7rem/1 'Fredoka',sans-serif; }
+    .buddy-token { cursor:grab; touch-action:none; -webkit-user-select:none; user-select:none; }
+    .buddy-token.picked { outline:3px solid #DDACFF; outline-offset:5px; }
+    .buddy-token.dragging { opacity:.3; }
+    .buddy-token:focus-visible { outline:4px solid #EBCBFF; outline-offset:5px; }
+    .buddy-drag-ghost { position:fixed; z-index:9999; pointer-events:none; transform:translate(-50%,-60%) rotate(-5deg); width:82px; height:86px; font-size:3.2rem; }
+    .buddy-celebrate { display:flex; align-items:center; justify-content:center; gap:14px; text-align:center; color:#FFE2A4; font-family:'Fredoka',sans-serif; font-size:1.25rem; }
+    .buddy-celebrate>span { color:#FFDA66; font-size:2.6rem; }
+    .buddy-footer { min-height:64px; display:flex; justify-content:center; align-items:center; margin-top:16px; }
+    .buddy-next { min-height:50px; border:2px solid #FFF1BB; border-radius:18px; padding:10px 28px; background:linear-gradient(#FFE88C,#F8C447); color:#49304B; font:800 1.05rem 'Nunito',sans-serif; box-shadow:0 5px 0 #A66B2D; cursor:pointer; }
+    .buddy-round-dots { display:flex; gap:9px; }
+    .buddy-round-dots i { width:9px; height:9px; border-radius:50%; background:#77518F; }
+    .buddy-round-dots i.current { background:#FFDA78; box-shadow:0 0 0 4px #FFDA7826; }
+    .buddy-round-dots i.done { background:#8EF0B9; }
+    @media(max-width:520px) {
+      .buddy-stage { padding:18px 8px; border-radius:22px; }
+      .buddy-village { gap:2px; margin-top:18px; }
+      .buddy-feedback { font-size:.9rem; padding:10px; min-height:76px; }
+      .buddy-door-letter { font-size:clamp(1.2rem,6vw,2rem); }
+      .buddy-door-letter.paired { font-size:.9rem; padding:3px 1px; }
+      .buddy-open-badge { font-size:.66rem; padding:3px 6px; }
+      .buddy-mode button { font-size:.84rem; padding:8px 13px; }
+      .buddy-score { margin:17px 5px 10px; }
+      .buddy-star { font-size:1.2rem; margin-left:2px; }
+      .buddy-token-tray { min-height:125px; margin-top:20px; gap:16px; }
+      .buddy-tray-caption { font-size:.85rem; max-width:80px; }
+      .buddy-token { width:82px; height:86px; font-size:3.2rem; border-radius:20px; }
+      .buddy-celebrate { font-size:1.05rem; }
+    }
   </style>
 </head>
 <body>
@@ -1614,7 +1677,7 @@
         <div class="status-box" id="ownerDiagnostics">
           <strong>Brand:</strong> KIDZO (Standalone single-app architecture)<br />
           <strong>Entitlements:</strong> Free preview build (no payment or purchase gate active yet)<br />
-          <strong>Games Ready:</strong> 3 of 30 (R01 Alphabet Balloon Hunt, R02 Magic Letter Trails, M01 Fix the Number Train)<br />
+          <strong>Games Ready:</strong> 4 of 30 (R01 Alphabet Balloon Hunt, R02 Magic Letter Trails, R03 Letter Buddy Match, M01 Fix the Number Train)<br />
           <strong>Storybooks Ready:</strong> 1 of 35 (S01 Max and the Blue Ball)
         </div>
       </section>
@@ -1804,7 +1867,7 @@
       // Reading World (10)
       { id: "R01", world: "reading", ready: true, enTitle: "Alphabet Balloon Hunt", bmTitle: "Memburu Belon Abjad", descEn: "Pop the balloon matching the big target letter across 5 rounds.", descBm: "Pecahkan belon yang sepadan dengan huruf sasaran dalam 5 pusingan." },
       { id: "R02", world: "reading", ready: true, enTitle: "Magic Letter Trails", bmTitle: "Jejak Huruf Ajaib", descEn: "Trace uppercase and lowercase letter strokes in guided order.", descBm: "Surih garisan huruf besar dan kecil mengikut urutan." },
-      { id: "R03", world: "reading", ready: false, enTitle: "Letter Buddy Match", bmTitle: "Padanan Rakan Huruf", descEn: "Pair uppercase with lowercase letters to open little house doors.", descBm: "Padankan huruf besar dengan huruf kecil untuk membuka pintu rumah." },
+      { id: "R03", world: "reading", ready: true, enTitle: "Letter Buddy Match", bmTitle: "Padanan Rakan Huruf", descEn: "Pair uppercase with lowercase letters to open little house doors.", descBm: "Padankan huruf besar dengan huruf kecil untuk membuka pintu rumah." },
       { id: "R04", world: "reading", ready: false, enTitle: "Mystery Letter Sounds", bmTitle: "Bunyi Huruf Misteri", descEn: "Hear a letter name and find its hidden written letter (5 targets).", descBm: "Dengar nama huruf dan cari huruf bertulis yang tersembunyi (5 sasaran)." },
       { id: "R05", world: "reading", ready: false, enTitle: "First Letter Detective", bmTitle: "Detektif Huruf Awal", descEn: "Choose the initial letter of a realistic pictured object (F-fish / I-ikan).", descBm: "Pilih huruf awal bagi gambar objek sebenar (I-ikan / F-fish)." },
       { id: "R06", world: "reading", ready: false, enTitle: "Picture Parcel Delivery", bmTitle: "Penghantaran Bungkusan Gambar", descEn: "Match a written label to its object, pack and deliver (5 deliveries).", descBm: "Padankan label perkataan dengan objek dan hantar (5 bungkusan)." },
@@ -2065,6 +2128,7 @@
         phase: "playing", // playing | finished
         completedStarsThisRun: 0
       },
+      buddy: null, // R03 Letter Buddy Match session
       // Active R02 Magic Letter Trails session state
       trails: {
         caseMode: "upper", // upper | lower
@@ -3058,6 +3122,199 @@
       };
     }
 
+
+    /* R03 LETTER BUDDY MATCH: an independent, five-round village. */
+    const BUDDY_TEXT = {
+      en: {title:"Letter Buddy Match", sub:"Find a little home for every letter.",
+        hint:"Drag the big letter to its little letter. Or tap the letter, then a door.",
+        reverseHint:"Drag the little letter to its big letter. Or tap the letter, then a door.",
+        selected:"Now choose the matching door!", retry:"Try another door. Look at the shape of the letter!",
+        correct:"A perfect pair! You opened a little home.", finished:"Five happy homes. Brilliant matching!",
+        upper:"Big → little", lower:"Little → big", round:"Home", next:"Next home", again:"Play again",
+        pick:"Pick up letter", door:"Open door", matched:"Matched", restart:"New village", earned:"Stars this visit",
+        done:"Village complete!", nextLetter:"Ready for another letter?", animal:"A little friend is home!"},
+      bm: {title:"Padanan Rakan Huruf", sub:"Carikan rumah untuk setiap huruf.",
+        hint:"Seret huruf besar ke huruf kecilnya. Atau tekan huruf, kemudian pintu.",
+        reverseHint:"Seret huruf kecil ke huruf besarnya. Atau tekan huruf, kemudian pintu.",
+        selected:"Sekarang pilih pintu dengan huruf pasangannya!", retry:"Cuba pintu lain. Perhatikan bentuk huruf!",
+        correct:"Padanan tepat! Sebuah rumah berjaya dibuka.", finished:"Lima rumah sudah dibuka. Hebatnya!",
+        upper:"Besar → kecil", lower:"Kecil → besar", round:"Rumah", next:"Rumah seterusnya", again:"Main lagi",
+        pick:"Pilih huruf", door:"Buka pintu", matched:"Sepadan", restart:"Kampung baharu", earned:"Bintang lawatan ini",
+        done:"Kampung sudah lengkap!", nextLetter:"Sedia untuk huruf seterusnya?", animal:"Rakan kecil sudah pulang!"}
+    };
+    let buddyDragCleanup = null;
+    function cancelBuddyDrag() {
+      if (buddyDragCleanup) { const cleanup=buddyDragCleanup; buddyDragCleanup=null; cleanup(); }
+    }
+    function buddyShuffle(list) {
+      const out=[...list];
+      for(let i=out.length-1;i>0;i--) {const j=Math.floor(Math.random()*(i+1));[out[i],out[j]]=[out[j],out[i]];}
+      return out;
+    }
+    function startLetterBuddy(mode="upper") {
+      cancelTrailActivity(); clearAllTimers(); stopAllSpeechAndAudio(); cancelBuddyDrag();
+      const bank="ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+      const targets=buddyShuffle(bank).slice(0,5);
+      state.buddy={mode:mode==="lower"?"lower":"upper", index:0, selected:false,
+        status:"neutral", sessionStars:0, rounds:targets.map(target=>({target,
+          choices:buddyShuffle([target,...buddyShuffle(bank.filter(c=>c!==target)).slice(0,2)]),solved:false}))};
+      state.route="play-r03";render();
+    }
+    function awardBuddyProgress(letter) {
+      const prev=state.progress.games.R03||{};
+      const letters=Array.isArray(prev.matchedLetters)?prev.matchedLetters:[];
+      const matchedLetters=Array.from(new Set([...letters,letter]));
+      const rounds=state.buddy.sessionStars;
+      state.progress.games.R03={...prev, matchedLetters,
+        starsEarned:Math.min(5,Math.max(Number(prev.starsEarned)||0,matchedLetters.length)),
+        bestRounds:Math.max(Number(prev.bestRounds)||0,rounds),completed:Boolean(prev.completed)||rounds===5};
+      recalculateTotalStars();saveLocalProgress(state.currentUser?.uid||null);syncProgressToFirebase();
+    }
+    function selectBuddyLetter() {
+      const b=state.buddy;if(state.route!=="play-r03"||!b||b.rounds[b.index].solved)return;
+      b.selected=true;b.status="selected";
+      const token=document.getElementById("buddyToken");if(token){token.classList.add("picked");token.setAttribute("aria-pressed","true");}
+      const feedback=document.getElementById("buddyFeedback");if(feedback)feedback.textContent=BUDDY_TEXT[state.lang].selected;
+    }
+    function attemptBuddyDoor(choiceIndex) {
+      const b=state.buddy;
+      if(state.route!=="play-r03"||!b)return false;
+      const round=b.rounds[b.index];
+      if(round.solved||!Number.isInteger(choiceIndex)||choiceIndex<0||choiceIndex>=round.choices.length)return false;
+      if(!b.selected){selectBuddyLetter();return false;}
+      if(round.choices[choiceIndex]!==round.target){
+        b.status="retry";playSfx("retry");render();return false;
+      }
+      round.solved=true;b.status="correct";b.selected=false;b.sessionStars++;
+      awardBuddyProgress(round.target);playSfx(b.index===4?"complete":"correct");render();return true;
+    }
+    function nextBuddyHome() {
+      const b=state.buddy;if(state.route!=="play-r03"||!b||!b.rounds[b.index].solved||b.index>=4)return;
+      b.index++;b.status="neutral";b.selected=false;render();
+    }
+    // Original toy-house art, embedded as SVG. No new asset folders are required.
+    function buddyHouseArt(slot, opened) {
+      const palettes=[{roof:"#FF5EA5",wall:"#FFE6AF",trim:"#E33A86",door:"#FF8BBC"},
+        {roof:"#FFE05C",wall:"#BFEFDB",trim:"#DC9B29",door:"#FFD96A"},
+        {roof:"#71E68A",wall:"#DBCCFF",trim:"#2AAB69",door:"#8AEDAD"}];
+      const c=palettes[slot];const id="buddyHouse"+slot;
+      return `<svg viewBox="0 0 240 288" class="buddy-house-art" aria-hidden="true">
+        <defs>
+          <linearGradient id="${id}wall" x2="0.8" y2="1"><stop stop-color="#FFFFFF"/><stop offset=".22" stop-color="${c.wall}"/><stop offset="1" stop-color="${c.wall}"/></linearGradient>
+          <linearGradient id="${id}roof" x2=".2" y2="1"><stop stop-color="${c.roof}"/><stop offset="1" stop-color="${c.trim}"/></linearGradient>
+          <linearGradient id="${id}door" x2="1" y2=".3"><stop stop-color="#FFFFFF" stop-opacity=".65"/><stop offset=".3" stop-color="${c.door}"/><stop offset="1" stop-color="${c.trim}"/></linearGradient>
+        </defs>
+        <ellipse cx="120" cy="272" rx="108" ry="12" fill="#100B2D" opacity=".32"/>
+        <rect x="164" y="24" width="24" height="57" rx="5" fill="${c.trim}"/><rect x="160" y="22" width="32" height="12" rx="4" fill="${c.roof}"/>
+        <path d="M30 114 L120 40 L210 114 V252 Q210 263 198 263 H42 Q30 263 30 251Z" fill="${c.trim}"/>
+        <path d="M34 109 L120 42 L202 109 V248 Q202 256 194 256 H42 Q34 256 34 248Z" fill="url(#${id}wall)"/>
+        <path d="M18 113 L119 26 Q122 23 126 27 L224 111 Q230 120 222 126 L211 131 L121 57 L30 132 L18 125 Q12 120 18 113Z" fill="${c.trim}"/>
+        <path d="M18 109 L117 23 Q121 20 126 24 L224 109 Q227 113 223 116 L211 121 L121 47 L30 121 L18 116 Q13 112 18 109Z" fill="url(#${id}roof)"/>
+        <path d="M30 107 L119 34" stroke="#FFFFFF" stroke-opacity=".45" stroke-width="5" stroke-linecap="round"/>
+        <path d="M68 78 L83 91 M91 58 L106 72 M140 59 L126 72 M164 78 L150 91 M185 96 L172 110" stroke="${c.trim}" stroke-width="3" opacity=".35"/>
+        <circle cx="119" cy="97" r="18" fill="${c.trim}"/><circle cx="118" cy="95" r="13" fill="#A6EBFF"/>
+        <path d="M118 82 V108 M105 95 H131" stroke="#FFF7DE" stroke-width="4"/>
+        <rect x="45" y="149" width="36" height="44" rx="9" fill="${c.trim}"/><rect x="49" y="151" width="28" height="34" rx="6" fill="#8DDAF7"/>
+        <path d="M63 153 V184 M50 168 H76" stroke="#FFF8DB" stroke-width="4"/>
+        <rect x="158" y="149" width="30" height="44" rx="9" fill="${c.trim}"/><rect x="162" y="152" width="22" height="32" rx="6" fill="#8DDAF7"/>
+        <path d="M173 154 V183 M164 168 H183" stroke="#FFF8DB" stroke-width="3"/>
+        <path d="M36 134 H84 M157 134 H200 M36 205 H82 M159 205 H200 M36 228 H82 M159 228 H200" stroke="${c.trim}" stroke-opacity=".13" stroke-width="2"/>
+        <path d="M36 123 V246 Q36 252 43 252 H75" fill="none" stroke="#FFFFFF" stroke-opacity=".5" stroke-width="4"/>
+        <path d="M201 130 V247 Q201 254 192 254 H170" fill="none" stroke="${c.trim}" stroke-opacity=".18" stroke-width="6"/>
+        <rect x="85" y="141" width="71" height="115" rx="30" fill="${c.trim}"/>
+        <rect x="91" y="147" width="59" height="109" rx="26" fill="#33204F"/>
+        <path d="M86 249 H157 L168 264 H76Z" fill="#FFF3D5"/><path d="M76 264 H168 V269 H76Z" fill="#C6B1AC"/>
+        ${opened ? `<g class="buddy-friend">
+          <ellipse cx="121" cy="234" rx="24" ry="22" fill="${slot===1?'#E9EDF7':slot===2?'#EFC28B':'#FFCBA3'}"/>
+          <path d="M100 207 L100 178 L115 194 M126 193 L143 177 L143 209" fill="${slot===1?'#E9EDF7':slot===2?'#EFC28B':'#FFCBA3'}" stroke="#CB8B9B" stroke-width="3" stroke-linejoin="round"/>
+          <ellipse cx="121" cy="211" rx="28" ry="23" fill="${slot===1?'#F6F4FF':slot===2?'#F5D6AA':'#FFE2C5'}"/>
+          <ellipse cx="110" cy="207" rx="3" ry="4" fill="#382240"/><ellipse cx="132" cy="207" rx="3" ry="4" fill="#382240"/>
+          <path d="M117 216 Q121 221 125 216 M113 222 Q121 229 129 222" fill="none" stroke="#AB6680" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="102" cy="217" r="4" fill="#FF99BA" opacity=".8"/><circle cx="140" cy="217" r="4" fill="#FF99BA" opacity=".8"/>
+          <path d="M104 240 Q100 222 95 232 M137 241 Q145 220 148 230" fill="none" stroke="#FFE2C5" stroke-width="10" stroke-linecap="round"/>
+        </g>` : `<rect x="93" y="149" width="55" height="104" rx="25" fill="url(#${id}door)"/>
+          <path d="M102 184 V238 M138 184 V238" stroke="${c.trim}" stroke-opacity=".28" stroke-width="2"/><circle cx="139" cy="218" r="4" fill="#FFF4BF" stroke="#B58038" stroke-width="1.5"/>`}
+        <path d="M34 242 Q40 219 50 240 Q58 221 64 243 M172 243 Q180 218 189 241 Q198 225 204 246" fill="#49C97C"/>
+        <g fill="#FF80BB"><circle cx="44" cy="234" r="5"/><circle cx="57" cy="238" r="5"/><circle cx="187" cy="234" r="5"/></g>
+        <g fill="#FFE465"><circle cx="44" cy="234" r="2"/><circle cx="57" cy="238" r="2"/><circle cx="187" cy="234" r="2"/></g>
+      </svg>`;
+    }
+    function renderLetterBuddy() {
+      const b=state.buddy,t=BUDDY_TEXT[state.lang],r=b.rounds[b.index],finished=r.solved&&b.index===4;
+      const label=b.mode==="upper"?r.target:r.target.toLowerCase();
+      const message=b.status==="retry"?t.retry:r.solved?(finished?t.finished:t.correct):b.selected?t.selected:(b.mode==="upper"?t.hint:t.reverseHint);
+      return `<section class="panel buddy-panel">
+        <div class="panel-header"><h2>R03 · ${t.title}</h2><button class="btn-back" type="button" data-nav="games">← ${UI_STRINGS[state.lang].navGames}</button></div>
+        <div class="buddy-stage">
+          <div class="buddy-heading"><span class="buddy-eyebrow">KIDZO · LETTER VILLAGE</span><h3>${t.sub}</h3>
+            <div class="buddy-mode" role="group" aria-label="Letter direction">
+              <button type="button" data-buddy-mode="upper" aria-pressed="${b.mode==='upper'}">${t.upper}</button>
+              <button type="button" data-buddy-mode="lower" aria-pressed="${b.mode==='lower'}">${t.lower}</button>
+            </div>
+          </div>
+          <div class="buddy-score"><span>${t.round} <strong>${b.index+1} / 5</strong></span><span aria-label="${t.earned}">${Array.from({length:5},(_,i)=>`<span class="buddy-star ${i<b.sessionStars?'lit':''}">★</span>`).join('')}</span></div>
+          <div class="buddy-feedback ${r.solved?'success':b.status==='retry'?'retry':''}" id="buddyFeedback" role="status" aria-live="polite">${message}</div>
+          <div class="buddy-village" role="group" aria-label="${t.door}">
+            ${r.choices.map((ch,i)=>{
+              const opened=r.solved&&ch===r.target,doorLetter=b.mode==='upper'?ch.toLowerCase():ch;
+              return `<button type="button" class="buddy-house ${opened?'opened':''}" data-buddy-door="${i}" ${r.solved?'disabled':''} aria-label="${t.door} ${doorLetter}">
+                ${buddyHouseArt(i,opened)}
+                <span class="buddy-door-letter ${opened?'paired':''}">${opened?`${label} ${doorLetter}`:doorLetter}</span>
+                ${opened?`<span class="buddy-open-badge">✓ ${t.matched}</span>`:''}
+              </button>`;
+            }).join('')}
+          </div>
+          <div class="buddy-token-tray">
+            ${!r.solved?`<span class="buddy-tray-caption">${t.pick}</span><button type="button" id="buddyToken" class="buddy-token ${b.selected?'picked':''}" aria-label="${t.pick} ${label}" aria-pressed="${b.selected}">${label}</button><span class="buddy-tray-dots" aria-hidden="true">· · ·</span>`:
+              `<div class="buddy-celebrate"><span aria-hidden="true">★</span><strong>${finished?t.done:t.animal}</strong></div>`}
+          </div>
+          <div class="buddy-footer">
+            ${r.solved?(finished?`<button type="button" class="buddy-next" id="buddyAgain">${t.again} ↻</button>`:`<button type="button" class="buddy-next" id="buddyNext">${t.next} →</button>`):`<span class="buddy-round-dots" aria-hidden="true">${b.rounds.map((x,i)=>`<i class="${x.solved?'done':i===b.index?'current':''}"></i>`).join('')}</span>`}
+          </div>
+        </div>
+      </section>`;
+    }
+    function bindLetterBuddyEvents() {
+      document.querySelectorAll('[data-buddy-mode]').forEach(el=>el.onclick=()=>startLetterBuddy(el.dataset.buddyMode));
+      document.querySelectorAll('[data-buddy-door]').forEach(el=>el.onclick=()=>attemptBuddyDoor(Number(el.dataset.buddyDoor)));
+      const next=document.getElementById('buddyNext');if(next)next.onclick=nextBuddyHome;
+      const again=document.getElementById('buddyAgain');if(again)again.onclick=()=>startLetterBuddy(state.buddy.mode);
+      const token=document.getElementById('buddyToken');if(!token)return;
+      token.onclick=selectBuddyLetter;
+      token.onpointerdown=e=>{
+        if(e.button!==undefined&&e.button!==0)return;
+        const b=state.buddy;if(!b||b.rounds[b.index].solved)return;
+        cancelBuddyDrag();selectBuddyLetter();unlockSfx();
+        let ghost=null,hover=null,moved=false;
+        const pointer=e.pointerId,startX=e.clientX,startY=e.clientY;
+        try{token.setPointerCapture(pointer);}catch(_){}
+        const clear=()=>{
+          if(ghost)ghost.remove();if(hover)hover.classList.remove('drop-hover');
+          token.classList.remove('dragging');
+          token.onpointermove=null;token.onpointerup=null;token.onpointercancel=null;token.onlostpointercapture=null;
+          try{token.releasePointerCapture(pointer);}catch(_){}
+        };
+        buddyDragCleanup=clear;
+        token.onpointermove=ev=>{
+          if(ev.pointerId!==pointer)return;
+          if(!moved&&Math.hypot(ev.clientX-startX,ev.clientY-startY)<8)return;
+          moved=true;ev.preventDefault();
+          if(!ghost){ghost=document.createElement('div');ghost.className='buddy-drag-ghost';ghost.textContent=token.textContent;ghost.setAttribute('aria-hidden','true');document.body.appendChild(ghost);token.classList.add('dragging');}
+          ghost.style.left=ev.clientX+'px';ghost.style.top=ev.clientY+'px';
+          const hit=document.elementFromPoint(ev.clientX,ev.clientY)?.closest('[data-buddy-door]');
+          if(hover!==hit){if(hover)hover.classList.remove('drop-hover');hover=hit;if(hover)hover.classList.add('drop-hover');}
+        };
+        token.onpointerup=ev=>{
+          if(ev.pointerId!==pointer)return;
+          const hit=moved?document.elementFromPoint(ev.clientX,ev.clientY)?.closest('[data-buddy-door]'):null;
+          cancelBuddyDrag();
+          if(moved){ev.preventDefault();if(hit)attemptBuddyDoor(Number(hit.dataset.buddyDoor));}
+        };
+        token.onpointercancel=ev=>{if(ev.pointerId===pointer)cancelBuddyDrag();};
+        token.onlostpointercapture=ev=>{if(ev.pointerId===pointer)cancelBuddyDrag();};
+      };
+    }
+
     /* =========================================================================
        5. STORYBOOK READER ENGINE (S01–S35)
        ========================================================================= */
@@ -3160,6 +3417,7 @@
       if (gid === "M01") startNumberTrain("easy");
       else if (gid === "R01") startBalloonHunt(state.balloon.caseMode);
       else if (gid === "R02") initLetterTrails(state.trails.caseMode, state.trails.letter);
+      else if (gid === "R03") startLetterBuddy();
     }
 
     const HOME_ART = {
@@ -3610,6 +3868,7 @@
     function renderStarsProgress(t) {
       const r01 = state.progress.games["R01"] || { starsEarned: 0, bestRounds: 0, completed: false };
       const r02 = state.progress.games["R02"] || { starsEarned: 0, bestRounds: 0, completed: false };
+      const r03 = state.progress.games["R03"] || { starsEarned: 0 };
       const m01 = state.progress.games["M01"] || { starsEarned: 0, bestRounds: 0, completed: false };
       const s01 = state.progress.stories["S01"] || { lastPage: 0, completed: false };
 
@@ -3637,6 +3896,11 @@
               <button class="card-action-btn launch" type="button" data-launch-game="R02">${t.playNow}</button>
             </article>
             <article class="item-card ready">
+              <h3>R03: Letter Buddy Match</h3>
+              <p>Stars earned: ${r03.starsEarned} / 5</p>
+              <button class="card-action-btn launch" type="button" data-launch-game="R03">${t.playNow}</button>
+            </article>
+            <article class="item-card ready">
               <h3>M01: Fix the Number Train</h3>
               <p>Stars earned: ${m01.starsEarned} / 5</p>
               <button class="card-action-btn launch" type="button" data-launch-game="M01">${t.playNow}</button>
@@ -3652,6 +3916,8 @@
     }
 
     function render() {
+      cancelBuddyDrag();
+      document.body.classList.toggle("r03-theme", state.route === "play-r03");
       document.body.classList.toggle("r02-dark", state.route === "play-r02");
       const t = UI_STRINGS[state.lang];
       document.documentElement.lang = state.lang === "bm" ? "ms" : "en";
@@ -3669,7 +3935,7 @@
         btn.querySelector("span").textContent = navLabels[key];
         const isCurrent =
           state.route === key ||
-          (key === "games" && (state.route === "play-m01" || state.route === "play-r01" || state.route === "play-r02")) ||
+          (key === "games" && (state.route === "play-m01" || state.route === "play-r01" || state.route === "play-r02" || state.route === "play-r03")) ||
           (key === "stories" && state.route === "read-story");
         btn.classList.toggle("active", isCurrent);
       });
@@ -3680,6 +3946,7 @@
       else if (state.route === "play-m01") main.innerHTML = renderNumberTrain(t);
       else if (state.route === "play-r01") main.innerHTML = renderBalloonHunt(t);
       else if (state.route === "play-r02") main.innerHTML = renderMagicLetterTrails(t);
+      else if (state.route === "play-r03") main.innerHTML = renderLetterBuddy();
       else if (state.route === "stories") main.innerHTML = renderStoriesBookshelf(t);
       else if (state.route === "read-story") main.innerHTML = renderStoryReader(t);
       else if (state.route === "progress") main.innerHTML = renderStarsProgress(t);
@@ -3688,6 +3955,7 @@
     }
 
     function bindDynamicEvents() {
+      if (state.route === "play-r03") bindLetterBuddyEvents();
       document.querySelectorAll("[data-nav]").forEach(el => {
         el.onclick = () => navigateTo(el.getAttribute("data-nav"));
       });
@@ -3981,4 +4249,4 @@
   </script>
 </body>
 </html>
-<!-- KIDZO_END_OF_COMPLETE_FILE_V2 -->
+<!-- KIDZO_END_OF_COMPLETE_FILE_R03 -->
