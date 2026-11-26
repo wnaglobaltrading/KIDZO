@@ -1,0 +1,17 @@
+KEMAS KINI KECIL D06 + D07
+
+Pakej ini untuk aplikasi KIDZO yang sudah mempunyai permainan terdahulu.
+Jangan padam fail atau folder lama di GitHub.
+
+1. Double-click KIDZO_D06_D07_Upload_Kecil.zip untuk unzip.
+2. Buka folder yang terhasil.
+3. Di GitHub repository KIDZO, pada halaman utama Code, pilih Add file > Upload files.
+4. Seret index.html, folder assets dan _headers DARI DALAM folder ini.
+   Jangan seret ZIP. Jangan seret folder pembungkusnya.
+5. Semak senarai upload: mesti ada index.html dan fail .webp dalam assets/kidzo/.
+   Jika ada nama berakhir .zip, buang item itu daripada senarai upload.
+6. Commit changes sekali dan tunggu deploy Netlify berjaya.
+7. Refresh aplikasi. Jika masih versi lama, tekan Option + Command + R di Safari.
+
+Tiada audio baharu diperlukan untuk kemas kini ini.
+Fail gambar dan audio permainan lama mesti dikekalkan.
