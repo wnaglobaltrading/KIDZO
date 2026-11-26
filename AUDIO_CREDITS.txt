@@ -1,0 +1,136 @@
+KIDZO D01 ANIMAL CALL RECORDING CREDITS
+
+Field recordings, local MP3 clips. No AI imitation or human imitation intentionally used. Clips were trimmed, faded and volume-normalized for short playback. Species artwork is illustrative; recordings represent animal categories.
+
+First 21 licensed recordings are distributed as trimmed clips by El Trivia. Its source/license listing: https://eltrivia.com/credits/
+Original recording authors and source pages:
+
+cow | Mystikuum | CC0
+https://freesound.org/people/Mystikuum/sounds/401636/
+Duration in game: 3.89 s
+
+sheep | satoristudios3 | CC0
+https://freesound.org/people/satoristudios3/sounds/692900/
+Duration in game: 3.53 s
+
+horse | 3bagbrew | CC0
+https://freesound.org/people/3bagbrew/sounds/59569/
+Duration in game: 3.97 s
+
+duck | WavJunction.com | CC0
+https://freesound.org/people/WavJunction.com/sounds/456770/
+Duration in game: 3.94 s
+
+chicken | Breviceps | CC0
+https://freesound.org/people/Breviceps/sounds/456803/
+Duration in game: 3.89 s
+
+rooster | jsbarrett | CC0
+https://freesound.org/people/jsbarrett/sounds/200339/
+Duration in game: 2.74 s
+
+goat | Kinoton | CC0
+https://freesound.org/people/Kinoton/sounds/581240/
+Duration in game: 3.6 s
+
+donkey | felix.blume | CC0
+https://freesound.org/people/felix.blume/sounds/705300/
+Duration in game: 3.97 s
+
+dog | aunrea | CC0
+https://freesound.org/people/aunrea/sounds/495658/
+Duration in game: 3.81 s
+
+cat | tuberatanka | CC0
+https://freesound.org/people/tuberatanka/sounds/110011/
+Duration in game: 1.38 s
+
+lion | Filmscore | CC0
+https://freesound.org/people/Filmscore/sounds/869002/
+Duration in game: 3.94 s
+
+elephant | ikbenraar | CC0
+https://freesound.org/people/ikbenraar/sounds/819668/
+Duration in game: 3.97 s
+
+monkey | Bidone | CC0
+https://freesound.org/people/Bidone/sounds/67361/
+Duration in game: 3.21 s
+
+wolf | NPS | US federal work
+https://www.nps.gov/subjects/sound/sounds-wolf.htm
+Duration in game: 3.94 s
+
+frog | NPS | US federal work
+https://www.nps.gov/subjects/sound/sounds-pigfrog.htm
+Duration in game: 1.93 s
+
+owl | Patrick_Corra | CC0
+https://freesound.org/people/Patrick_Corra/sounds/745208/
+Duration in game: 3.97 s
+
+bee | NPS | US federal work
+https://www.nps.gov/subjects/sound/sounds-bee.htm
+Duration in game: 2.77 s
+
+snake | 7h3_lark | CC0
+https://freesound.org/people/7h3_lark/sounds/268580/
+Duration in game: 3.94 s
+
+sea-lion | nifvimp | CC0
+https://freesound.org/people/nifvimp/sounds/680735/
+Duration in game: 3.29 s
+
+crow | Mish7913 | CC0
+https://freesound.org/people/Mish7913/sounds/741366/
+Duration in game: 3.97 s
+
+songbird | NPS | US federal work
+https://www.nps.gov/subjects/sound/sounds-american-robin.htm
+Duration in game: 3.45 s
+
+goose | jahjahjahjah | CC0
+https://freesound.org/people/jahjahjahjah/sounds/805297/
+Duration in game: 0.5 s
+
+turkey | JarredGibb | CC0
+https://freesound.org/people/JarredGibb/sounds/233123/
+Duration in game: 0.97 s
+
+peacock | richwise | CC0
+https://freesound.org/people/richwise/sounds/810711/
+Duration in game: 5.04 s
+
+pigeon | 5ro4 | CC0
+https://freesound.org/people/5ro4/sounds/649390/
+Duration in game: 4.36 s
+
+seagull | speakingmusic | CC0
+https://freesound.org/people/speakingmusic/sounds/586831/
+Duration in game: 5.04 s
+
+tiger | Bidone | CC0
+https://freesound.org/people/Bidone/sounds/67357/
+Duration in game: 1.23 s
+
+cricket | TheWoodlandNomad | CC0
+https://freesound.org/people/TheWoodlandNomad/sounds/363111/
+Duration in game: 5.04 s
+
+dolphin | felix.blume | CC0
+https://freesound.org/people/felix.blume/sounds/161691/
+Duration in game: 5.04 s
+
+whale | KEVOY | CC0
+https://freesound.org/people/KEVOY/sounds/82325/
+Duration in game: 5.04 s
+
+D02 HABITAT REFERENCES
+Categories are simplified suitable habitats, not exclusive ranges. Forest includes bamboo and rain forests; polar includes both Arctic and Antarctic; freshwater includes riverbanks.
+https://animals.sandiegozoo.org/habitats
+https://nationalzoo.si.edu/animals/orangutan
+https://nationalzoo.si.edu/animals/giant-panda
+https://nationalzoo.si.edu/animals/sand-cat
+https://animals.sandiegozoo.org/animals/fennec-fox
+https://animals.sandiegozoo.org/animals/capybara
+https://sdzsafaripark.org/animals/platypus
