@@ -2076,6 +2076,10 @@ body.m02-theme{background:#f5b3bf;background-image:linear-gradient(145deg,#ffdec
 @media(max-width:560px){.cafe-service{grid-template-columns:1fr;padding:0 10px 15px;gap:6px}.cafe-animal{width:150px}.cafe-customer h3{font-size:1.05rem}.cafe-plate{min-height:175px;max-width:380px;margin:auto;padding:18px 14px}.cafe-piece .cafe-sprite{max-width:63px}.cafe-order{gap:6px;font-size:.93rem}.cafe-order-food{width:45px}.cafe-counter{gap:12px;padding:12px 8px}.cafe-tray{width:120px}.cafe-controls .reader-btn{padding:10px;font-size:.9rem}}
 @media(prefers-reduced-motion:reduce){.cafe-happy{animation:none}}
 
+
+/* M02: isolate irregular atlas cells without changing source artwork. */
+.cafe-sprite{position:relative;overflow:hidden;background-image:none!important;vertical-align:middle;line-height:0;height:auto;aspect-ratio:1/1}
+.cafe-sprite-image{display:block;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background-image:var(--cafe-atlas);background-repeat:no-repeat;pointer-events:none}
 </style>
 </head>
 <body>
@@ -5481,7 +5485,17 @@ body.m02-theme{background:#f5b3bf;background-image:linear-gradient(145deg,#ffdec
       recalculateTotalStars();saveLocalProgress(state.currentUser?.uid||null);syncProgressToFirebase();playSfx('correct');render();return true;
     }
     function cafeNext() {const g=state.cafe;if(state.route!=='play-m02'||!g||g.status!=='served')return false;if(g.index===4){g.status='finished';playSfx('complete');}else{g.index++;g.count=0;g.status='building';g.feedback='';}render();return true;}
-    function cafeSprite(index,extra='') {return `<span class="cafe-sprite ${extra}" style="background-position:${(index%5)*25}% ${Math.floor(index/5)*20}%" aria-hidden="true"></span>`;}
+    const CAFE_SPRITE_BOXES = [[27,5,202,239],[248,12,210,229],[463,6,224,237],[693,36,211,204],[924,9,213,235],[17,268,209,214],[249,260,188,226],[458,268,200,210],[697,266,184,215],[907,269,232,209],[27,491,182,267],[237,510,209,250],[493,508,146,248],[696,498,163,254],[888,508,245,251],[31,771,194,236],[241,806,205,173],[478,783,177,203],[732,774,167,215],[913,809,221,156],[29,1014,176,160],[276,1014,137,155],[504,1042,113,111],[729,1028,112,136],[900,1016,232,147],[22,1208,205,152],[257,1198,179,160],[454,1236,234,93],[722,1223,135,126],[923,1223,194,125]];
+    function cafeSprite(index,extra='') {
+      const b = CAFE_SPRITE_BOXES[index];
+      if (!b) return '';
+      const [x,y,w,h] = b;
+      const scale = 88 / Math.max(w,h);
+      const width = (w*scale).toFixed(5), height = (h*scale).toFixed(5);
+      // Each generated row has its own true bounds. Fit this rectangle inside
+      // a square viewport; never reveal pixels from neighbouring atlas cells.
+      return `<span class="cafe-sprite ${extra}" aria-hidden="true"><span class="cafe-sprite-image" style="width:${width}%;height:${height}%;background-size:${(1145/w*100).toFixed(7)}% ${(1374/h*100).toFixed(7)}%;background-position:${(x/(1145-w)*100).toFixed(7)}% ${(y/(1374-h)*100).toFixed(7)}%"></span></span>`;
+    }
     function renderAnimalCafe() {
       const g=state.cafe,bm=state.lang==='bm';if(!g)return '';
       const title=bm?'Kafe Haiwan Lapar':'Hungry Animal Café';
