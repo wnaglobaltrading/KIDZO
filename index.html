@@ -2707,14 +2707,44 @@ function kidzoEmbeddedURL(path){
       if (text) stopAllSpeechAndAudio();
       return text ? speakGameVoice(text) : false;
     }
+    const GAME_FEEDBACK_LINES = {
+      correct: {
+        en: ["Great job!", "You got it!", "That's right!", "Well done!"],
+        bm: ["Bagus!", "Betul tu!", "Pandainya!", "Syabas!"]
+      },
+      retry: {
+        en: ["Let's try again.", "Take your time.", "Have another look."],
+        bm: ["Jom cuba lagi.", "Tak apa, cuba perlahan-lahan.", "Tengok sekali lagi."]
+      },
+      complete: {
+        en: ["You did it!", "Amazing work!", "You finished the game!"],
+        bm: ["Kamu berjaya!", "Hebatnya!", "Kamu dah selesai!"]
+      },
+      train: {
+        en: ["The train is ready!", "All aboard! Let's go!"],
+        bm: ["Kereta api dah sedia!", "Semua naik! Jom bergerak!"]
+      }
+    };
+    const gameFeedbackPositions = {};
+    function nextGameFeedbackLine(key, lang) {
+      const lines = GAME_FEEDBACK_LINES[key]?.[lang];
+      if (!lines?.length) return "";
+      const id = key + ":" + lang;
+      const position = gameFeedbackPositions[id] || 0;
+      gameFeedbackPositions[id] = (position + 1) % lines.length;
+      return lines[position];
+    }
     function gameVoiceFeedback(key) {
       if (!state.settings.gameVoiceEnabled || !/^play-[rmd]\d{2}$/.test(state.route)) return;
-      const words = {correct:["Well done!","Bagus! Betul!"],retry:["Try again. You can do it!","Cuba lagi. Kamu boleh!"],complete:["Amazing! You finished!","Hebat! Kamu dah selesai!"]};
-      if (!words[key]) return;
+      if (!["correct", "retry", "complete"].includes(key)) return;
       const now = Date.now();
       if (key !== "complete" && now - lastGameFeedbackAt < 900) return;
-      lastGameFeedbackAt = now;
-      speakGameVoice(words[key][state.lang === "bm" ? 1 : 0]);
+      const trainRound = state.train?.roundIndex;
+      // One utterance per answer: occasional departure lines replace praise.
+      const category = key === "correct" && state.route === "play-m01"
+        && Number.isInteger(trainRound) && trainRound % 2 === 1 ? "train" : key;
+      const text = nextGameFeedbackLine(category, state.lang === "bm" ? "bm" : "en");
+      if (text && speakGameVoice(text)) lastGameFeedbackAt = now;
     }
     function bindGameVoiceControls() {
       const text = gameVoiceInstruction();
