@@ -1,0 +1,24 @@
+{
+  "id": "/kidzo-mobile-test",
+  "name": "KIDZO",
+  "short_name": "KIDZO",
+  "start_url": "/kidzo-mobile-test.html",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#e8faff",
+  "theme_color": "#19b9d8",
+  "icons": [
+    {
+      "src": "kidzo-mobile-media/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "kidzo-mobile-media/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
