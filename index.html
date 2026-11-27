@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>KIDZO — Playful Learning Garden</title>
   <meta name="theme-color" content="#19b9d8">
   <meta name="application-name" content="KIDZO">
   <meta name="apple-mobile-web-app-title" content="KIDZO">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <link rel="manifest" href="kidzo.webmanifest?v=brand-1">
-  <link rel="apple-touch-icon" sizes="180x180" href="kidzo-icon-180.png?v=brand-1">
-  <link rel="icon" type="image/png" sizes="192x192" href="kidzo-icon-192.png?v=brand-1">
+  <link rel="manifest" href="kidzo.webmanifest?v=mobile-2">
+  <link rel="apple-touch-icon" sizes="180x180" href="kidzo-mobile-media/icon-180.png?v=mobile-1">
+  <link rel="icon" type="image/png" sizes="192x192" href="kidzo-mobile-media/icon-192.png?v=mobile-1">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -2251,13 +2251,72 @@ body.kidzo-auth-locked .app-shell,body.kidzo-auth-locked #settingsModal{display:
 .kidzo-login-card .login-reset{font-size:.88rem;margin:12px auto 0;min-height:40px;padding:8px;color:#28718d}
 #kidzoLoginStatus{margin:7px 0 0;font-size:.85rem;line-height:1.4;color:#496b7d}
 @media(max-width:380px){#kidzoLogin{padding-left:10px;padding-right:10px}.kidzo-login-header{padding-top:18px;padding-bottom:26px}.kidzo-login-mascot{width:88px;height:88px}.kidzo-login-content{padding-left:18px;padding-right:18px}.kidzo-login-card h1{font-size:1.5rem}}
+
+/* Mobile/tablet layout and touch controls, without changing game rules. */
+html{scroll-padding-bottom:calc(110px + env(safe-area-inset-bottom));-webkit-text-size-adjust:100%}
+.app-shell{width:100%;min-width:0;min-height:100svh;padding-bottom:calc(112px + env(safe-area-inset-bottom))}
+#mainView,.panel,.item-card,.world-info,.speech-bubble{min-width:0;max-width:100%}
+.panel-header h2,.item-card h3,.game-card-body h3,.world-info h2{overflow-wrap:anywhere}
+.catalogue-grid{grid-template-columns:repeat(auto-fill,minmax(min(255px,100%),1fr))}
+.top-bar{flex-wrap:wrap}.top-actions{max-width:100%}
+.bottom-nav{bottom:calc(8px + env(safe-area-inset-bottom));width:min(680px,calc(100% - 20px - env(safe-area-inset-left) - env(safe-area-inset-right)))}
+.modal-backdrop{padding-top:max(12px,env(safe-area-inset-top));padding-bottom:max(12px,env(safe-area-inset-bottom))}
+.modal-card{max-height:calc(100dvh - 32px - env(safe-area-inset-top) - env(safe-area-inset-bottom));overscroll-behavior:contain}
+button,a,input,select{touch-action:manipulation}input,select,textarea{font-size:16px}
+.trails-canvas-layer,.number-board canvas,.artist-paper>canvas,.discover-svg,.buddy-token,.parcel-label,.workshop-tile,.nature-animal-display[data-nature-drag],.builder-shape,.body-label,.jigsaw-piece,.sequence-card,.sequence-slot{touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.trails-canvas-layer,.number-board canvas,.artist-paper>canvas,.discover-svg{overscroll-behavior:contain}
+.reader-btn,.btn-back,.level-btn,.tab-btn,.trails-btn,.trails-letter-chip,.number-picker button,.lang-btn,.shop-token,.artist-paper-colours button,.artist-size{min-height:44px;min-width:44px}
+.reader-controls,.trails-controls-row,.train-controls,.tab-row{gap:10px;flex-wrap:wrap}
+.reader-controls button,.trails-controls-row button{white-space:normal;overflow-wrap:anywhere}
+.mascot-greeting-row{max-width:760px;gap:20px;align-items:center}
+button.home-kidzo-button{position:relative;width:160px;height:195px;padding:0;border:0;background:none;cursor:pointer;animation:none;flex-shrink:0;border-radius:24px}
+.home-kidzo-button img{position:relative;z-index:1;animation:homeKidzoBounce 3.2s ease-in-out infinite;pointer-events:none}
+.home-kidzo-button:after{content:"";position:absolute;bottom:2px;left:22%;right:22%;height:12px;border-radius:50%;background:#185e7d26;filter:blur(2px);pointer-events:none;animation:homeKidzoShadow 3.2s ease-in-out infinite}
+.home-kidzo-button.cheering img{animation:homeKidzoJump .75s ease-in-out 1}
+.home-kidzo-hint{font-size:.83rem!important;margin-top:8px!important;min-height:1.5em;color:#315e7c!important}
+@keyframes homeKidzoBounce{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-9px) rotate(1deg)}}
+@keyframes homeKidzoShadow{0%,100%{transform:scaleX(1);opacity:.75}50%{transform:scaleX(.8);opacity:.5}}
+@keyframes homeKidzoJump{0%,100%{transform:translateY(0) scale(1)}35%{transform:translateY(-19px) rotate(-4deg) scale(1.04)}70%{transform:translateY(-3px) rotate(3deg)}}
+.kidzo-login-mascot{width:144px;height:144px;border:3px solid white;border-radius:26px;margin-bottom:8px;object-fit:cover}
+.kidzo-login-brand{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+@media(max-width:1024px) and (pointer:coarse){html,body{background-attachment:scroll}.app-shell{padding-left:max(14px,env(safe-area-inset-left));padding-right:max(14px,env(safe-area-inset-right))}.jigsaw-piece,.sequence-card,.builder-shape{transition:none}}
+@media(min-width:600px) and (max-width:1024px){.panel{padding:16px}.mascot-greeting-row{gap:18px}button.home-kidzo-button{width:150px;height:185px}.home-stack{gap:18px}}
+@media(max-width:560px){
+ .app-shell{padding:12px max(10px,env(safe-area-inset-right)) calc(108px + env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left))}
+ .top-bar{align-items:flex-start;gap:10px}.top-actions{gap:6px;flex:1 1 44%}.top-actions:last-child{justify-content:flex-end}
+ .icon-pill{padding:0 10px;font-size:.86rem;min-height:44px}.lang-switch{padding:3px}.lang-btn{padding:0 9px}
+ .panel{padding:12px 9px;border-width:3px}.panel-header{gap:9px}.panel-header h2{font-size:1.25rem;flex:1 1 160px}.panel-header .btn-back{padding:0 12px}
+ .brand-hero{margin-bottom:14px}.mascot-greeting-row{gap:10px;align-items:center}button.home-kidzo-button{width:118px;height:152px}
+ .speech-bubble{padding:12px 10px;border-radius:20px}.speech-bubble h1{font-size:1.16rem}.speech-bubble p{font-size:.9rem;line-height:1.4}.home-kidzo-hint{font-size:.77rem!important}
+ .home-stack .world-card:not(.featured-banner){min-height:170px;padding-left:14px}.home-stack .world-card:not(.featured-banner) h2{font-size:1.2rem}
+ .catalogue-grid,.games-catalogue-panel .game-catalogue-grid{grid-template-columns:minmax(0,1fr)}
+ .reader-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.reader-controls button{padding:9px 8px;min-height:48px}
+ .story-reader-panel .sentence-box{padding:12px 8px;gap:8px}.story-reader-panel .word-chip{padding:8px 11px;font-size:1.25rem}
+ .story-reader-panel .story-art-box{width:100%;max-width:500px}.story-shelf-note{padding:10px 12px;gap:8px}
+ .train-stage,.balloon-stage,.mystery-stage,.detective-stage,.parcel-stage,.workshop-stage,.fishing-stage,.memory-stage,.blend-stage{max-width:100%}
+ .m01-theme .train-track-wrap{height:clamp(190px,54vw,250px)}.m01-theme .train-consist{min-width:0}.choice-grid{gap:10px}
+ .trails-picker-wrap{gap:7px}.r02-bright .trails-letter-chip{min-width:44px}.trails-controls-row{gap:10px}.trails-controls-row button{flex:1 1 95px;max-width:100%}
+ .parcel-label{min-width:0;width:min(100%,260px)}.parcel-pictures{gap:9px}.parcel-picture-card{padding:6px 4px 10px}
+ .workshop-slots{gap:20px 6px}.blend-slot-row{flex-wrap:wrap}.memory-grid[data-pairs="5"]{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .nature-choices{gap:10px}.color-learn-grid{gap:12px;margin:16px auto}.color-learn-choice{padding:12px 8px;min-height:145px}
+ .jigsaw-board{max-width:100%;width:min(100%,480px)}.jigsaw-preview{max-width:100%}.jigsaw-tray{width:100%;max-width:100%}
+ .paint-workspace,.artist-workspace{grid-template-columns:minmax(0,1fr);gap:18px}.paint-side,.artist-side{min-width:0;max-width:100%}
+ .paint-palette,.artist-colours{grid-template-columns:repeat(4,minmax(0,1fr));max-width:280px;margin-left:auto;margin-right:auto;gap:12px}
+ .paint-swatch,.artist-swatch{min-height:44px}.artist-stamps{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+ .sequence-timeline,.sequence-bank{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.sequence-slot strong,.sequence-card strong{font-size:.88rem;overflow-wrap:anywhere}
+ .modal-card{padding:16px 12px;border-radius:22px}.auth-btn-row{gap:10px}.auth-btn-row button{flex:1 1 130px}
+ .kidzo-login-mascot{width:132px;height:132px;border-radius:24px}
+}
+@media(max-width:360px){button.home-kidzo-button{width:100px;height:135px}.speech-bubble h1{font-size:1.06rem}.speech-bubble p{font-size:.85rem}.top-actions{flex-basis:46%}.top-bar .icon-pill{font-size:.8rem;padding:0 8px}.world-info p{overflow-wrap:anywhere}.maze-board{padding:6px;gap:5px;border-width:5px}.maze-tile{border-width:1px}.maze-tile img{inset:1px 2px 18px;width:calc(100% - 4px);height:calc(100% - 19px)}}
+@media(orientation:landscape) and (max-height:550px){.app-shell{padding-top:10px}.bottom-nav{max-width:560px}.nav-item{min-height:44px}.story-reader-panel .story-art-box{max-width:380px}.modal-card{max-height:calc(100dvh - 20px)}}
+@media(prefers-reduced-motion:reduce){.home-kidzo-button img,.home-kidzo-button:after,.home-kidzo-button.cheering img{animation:none!important}}
 </style>
 </head>
 <body class="kidzo-auth-locked">
   <section id="kidzoLogin" aria-labelledby="kidzoLoginTitle">
     <div class="kidzo-login-card">
       <div class="kidzo-login-header">
-        <img class="kidzo-login-mascot" src="kidzo-icon-192.png?v=brand-1" width="104" height="104" alt="Kidzo, our friendly blue mascot" fetchpriority="high" decoding="async">
+        <img class="kidzo-login-mascot" src="kidzo-mobile-media/icon-192.png?v=mobile-1" width="104" height="104" alt="Kidzo, our friendly blue mascot" fetchpriority="high" decoding="async">
         <div class="kidzo-login-brand">KIDZO</div>
       </div>
       <div class="kidzo-login-content">
@@ -2900,6 +2959,7 @@ function kidzoEmbeddedURL(path){
     let activeStoryUtterance = null;
 
     function stopAllSpeechAndAudio() {
+      stopHomeKidzo();
       sfxEpoch++;
       stopGameVoice();
       if(activeStoryRecording){activeStoryRecording.pause();activeStoryRecording.currentTime=0;activeStoryRecording=null;}
@@ -5410,6 +5470,37 @@ function changeStoryPage(delta){if(state.route!=='read-story'||state.reader.load
       discovery: "assets/kidzo/4318baa85a45a03c89b4.webp"
     };
 
+
+    const HOME_KIDZO_GREETINGS={en:["Hi! I'm Kidzo!","Let's play and learn!","Pick a world. Let's go!"],bm:["Hai! Saya Kidzo!","Jom main sambil belajar!","Pilih dunia. Jom mula!"]};
+    const homeKidzoGreetingIndex={en:0,bm:0};
+    let homeKidzoAudio=null,homeKidzoTicket=0,homeKidzoButton=null,homeKidzoTimer=null;
+    function stopHomeKidzo(){
+      homeKidzoTicket++;
+      if(homeKidzoAudio){homeKidzoAudio.onended=homeKidzoAudio.onerror=null;try{homeKidzoAudio.pause();homeKidzoAudio.currentTime=0;}catch(_){}homeKidzoAudio=null;}
+      if(homeKidzoTimer!==null){clearTimeout(homeKidzoTimer);homeKidzoTimer=null;}
+      if(homeKidzoButton){homeKidzoButton.classList.remove('cheering');homeKidzoButton.setAttribute('aria-busy','false');homeKidzoButton=null;}
+    }
+    function greetHomeKidzo(button){
+      if(state.route!=='home'||!button)return false;
+      stopAllSpeechAndAudio();
+      const bm=state.lang==='bm',lang='en',status=document.getElementById('homeKidzoStatus');
+      if(!state.settings.gameVoiceEnabled){if(status)status.textContent=bm?'Hidupkan Game Voice dalam Account untuk dengar Kidzo.':'Turn on Game Voice in Account to hear Kidzo.';return false;}
+      const index=homeKidzoGreetingIndex[lang]%3,ticket=homeKidzoTicket;
+      homeKidzoGreetingIndex[lang]++;
+      button.classList.add('cheering');button.setAttribute('aria-busy','true');homeKidzoButton=button;
+      homeKidzoTimer=setTimeout(()=>{if(ticket===homeKidzoTicket){button.classList.remove('cheering');homeKidzoTimer=null;}},850);
+      const player=new Audio('kidzo-mobile-media/'+lang+'-'+(index+1)+'.mp3');homeKidzoAudio=player;
+      player.preload='none';player.volume=.8;
+      const valid=()=>ticket===homeKidzoTicket&&state.route==='home'&&homeKidzoAudio===player;
+      const finish=failed=>{if(!valid())return;stopHomeKidzo();if(status)status.textContent=failed?(bm?'Tekan Kidzo sekali lagi untuk cuba semula.':'Tap Kidzo again to retry.'):(bm?'Tekan Kidzo untuk sapaan lain!':'Tap Kidzo for another greeting!');};
+      player.onended=()=>finish(false);player.onerror=()=>finish(true);
+      player.onplay=()=>{if(!valid()){player.pause();return;}if(status)status.textContent=HOME_KIDZO_GREETINGS[lang][index];};
+      if(status)status.textContent=HOME_KIDZO_GREETINGS[lang][index];
+      try{const pending=player.play();if(pending)pending.catch(()=>finish(true));}catch(_){finish(true);}
+      return true;
+    }
+    document.addEventListener('visibilitychange',()=>{if(document.hidden)stopHomeKidzo();});
+
     function renderHome(t) {
       const storiesDone=STORYBOOKS.filter(b=>b.ready&&state.progress.stories[b.id]?.completed).length;const storiesReady=STORYBOOKS.filter(b=>b.ready).length;
 
@@ -5426,17 +5517,18 @@ function changeStoryPage(delta){if(state.route!=='read-story'||state.reader.load
           </div>
 
           <div class="mascot-greeting-row">
-            <div class="mascot-avatar">
+            <button id="homeKidzo" class="mascot-avatar home-kidzo-button" type="button" aria-label="${state.lang==='bm'?'Tekan Kidzo untuk sapaan':'Tap Kidzo for a greeting'}" aria-busy="false">
               <img
                 src="assets/kidzo/93dc2b60b2a589dd92d6.webp"
                 alt="Kidzo mascot waving"
                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
               />
-              <div class="mascot-fallback">K</div>
-            </div>
+              <span class="mascot-fallback">K</span>
+            </button>
             <div class="speech-bubble">
               <h1>${t.greetingTitle}</h1>
               <p>${t.greetingSub}</p>
+              <p id="homeKidzoStatus" class="home-kidzo-hint" role="status" aria-live="polite">${state.lang==='bm'?'Tekan Kidzo untuk dengar sapaan!':'Tap Kidzo to hear a greeting!'}</p>
             </div>
           </div>
         </section>
@@ -6526,6 +6618,7 @@ function bindStoryBatchControls(){if(!window.KIDZO_STORY_AUDIO)prepareStoryAudio
     }
 
     function bindDynamicEvents() {
+      if(state.route==='home'){const kidzo=document.getElementById('homeKidzo');if(kidzo)kidzo.onclick=()=>greetHomeKidzo(kidzo);}
  if(state.route==="read-story")bindStoryBatchControls();
  if(state.route==="play-d10")bindSequenceGarden();
  if(state.route==="play-d09")bindArtistStudio();
@@ -6697,6 +6790,7 @@ function bindStoryBatchControls(){if(!window.KIDZO_STORY_AUDIO)prepareStoryAudio
 
     // Language switch without corrupting active round or duplicating stars
     document.getElementById("langEnBtn").onclick = () => {
+      stopHomeKidzo();
       state.lang = "en";
       if(state.route==="play-r04"&&state.mystery){stopAllSpeechAndAudio();state.mystery.heard=false;if(!state.mystery.rounds[state.mystery.index].solved)state.mystery.status="before";}
       if (state.route === "play-m01" && !state.train.resolved) {
@@ -6710,6 +6804,7 @@ function bindStoryBatchControls(){if(!window.KIDZO_STORY_AUDIO)prepareStoryAudio
     };
 
     document.getElementById("langBmBtn").onclick = () => {
+      stopHomeKidzo();
       state.lang = "bm";
       if(state.route==="play-r04"&&state.mystery){stopAllSpeechAndAudio();state.mystery.heard=false;if(!state.mystery.rounds[state.mystery.index].solved)state.mystery.status="before";}
       if (state.route === "play-m01" && !state.train.resolved) {
@@ -6747,7 +6842,7 @@ function bindStoryBatchControls(){if(!window.KIDZO_STORY_AUDIO)prepareStoryAudio
 
     document.getElementById("btnToggleGameVoice").onclick = () => {
       state.settings.gameVoiceEnabled = !state.settings.gameVoiceEnabled;
-      if (!state.settings.gameVoiceEnabled) stopGameVoice();
+      if (!state.settings.gameVoiceEnabled) {stopGameVoice();stopHomeKidzo();}
       updateAccountBanner();
     };
 
