@@ -5220,6 +5220,7 @@ async function openStory(storyId,restart=false){const book=STORYBOOKS.find(b=>b.
 function changeStoryPage(delta){if(state.route!=='read-story'||state.reader.loading||state.reader.artError||![-1,1].includes(delta))return false;const book=STORYBOOKS.find(b=>b.id===state.reader.storyId);if(!book?.ready)return false;const next=state.reader.pageIndex+delta;if(next<0)return false;clearAllTimers();stopAllSpeechAndAudio();if(next>=book.pages.length){persistStoryProgress(book.id,book.pages.length-1,true);playSfx('complete');state.route='stories';render();return true;}state.reader.pageIndex=next;state.reader.activeWordIdx=-1;persistStoryProgress(book.id,next,next===book.pages.length-1);render();if(state.reader.recordedReadEnabled)playRecordedPage();return true;}
 
     function handleWordTap(wordText, wordIdx) {
+      if(["S01","S02","S03"].includes(state.reader.storyId)){playRecordedPage(wordIdx);return;}
       const clean = wordText.replace(/[^a-zA-Z']/g, "");
       if (!clean) return;
       state.reader.activeWordIdx = wordIdx;
@@ -5242,13 +5243,14 @@ function changeStoryPage(delta){if(state.route!=='read-story'||state.reader.load
       }
     }
 
-    function playRecordedPage(){
+    function playRecordedPage(wordIdx=null){
       const reader=state.reader;if(state.route!=="read-story"||!["S01","S02","S03"].includes(reader.storyId))return false;
-      stopAllSpeechAndAudio();reader.recordedReadEnabled=true;
+      const word=Number.isInteger(wordIdx);if(word&&(wordIdx<0||wordIdx>=STORYBOOKS.find(b=>b.id===reader.storyId).pages[reader.pageIndex].text.split(' ').length))return false;
+      clearAllTimers();stopAllSpeechAndAudio();if(!word)reader.recordedReadEnabled=true;reader.activeWordIdx=word?wordIdx:-1;render();
       const sequence=storySpeechSequence,page=reader.pageIndex;
       const valid=()=>sequence===storySpeechSequence&&state.route==="read-story"&&state.reader===reader&&reader.pageIndex===page;
-      const audio=new Audio("audio/stories/"+reader.storyId+"/page-"+(page+1)+".mp3");activeStoryRecording=audio;
-      const finish=failed=>{if(!valid())return;activeStoryRecording=null;storyVoiceMessage(failed?(state.lang==="bm"?"Audio belum dapat dimainkan. Tekan Dengar Lagi untuk cuba semula.":"Audio could not play. Tap Listen Again to retry."):"");};
+      const audio=new Audio("audio/stories/"+reader.storyId+"/page-"+(page+1)+(word?"-word-"+(wordIdx+1):"")+".mp3");activeStoryRecording=audio;
+      const finish=failed=>{if(!valid())return;activeStoryRecording=null;if(word){reader.activeWordIdx=-1;render();}storyVoiceMessage(failed?(state.lang==="bm"?"Audio belum dapat dimainkan. Tekan Dengar Lagi untuk cuba semula.":"Audio could not play. Tap Listen Again to retry."):"");};
       audio.onended=()=>finish(false);audio.onerror=()=>finish(true);audio.onplay=()=>{if(!valid())audio.pause();};
       storyVoiceMessage("");try{const pending=audio.play();if(pending)pending.catch(()=>finish(true));}catch(_){finish(true);}return true;
     }
