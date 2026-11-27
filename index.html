@@ -2275,10 +2275,11 @@ body.d10-theme{background:linear-gradient(135deg,#b9ecde,#ffdc87 48%,#dfc0f4)}.s
         <h3>Audio & Voice Settings</h3>
         <div class="auth-btn-row">
           <button id="btnToggleSfxModal" class="reader-btn" type="button">Sound Effects: ON</button>
-          <button id="btnToggleDeviceVoice" class="reader-btn" type="button">Optional Device Voice Preview: OFF</button>
+          <button id="btnToggleGameVoice" class="reader-btn" type="button">Game Voice: ON</button>
+          <button id="btnToggleDeviceVoice" class="reader-btn" type="button">Story Voice: ON</button>
         </div>
         <p style="font-size:0.86rem; color:var(--text-muted); margin-top:8px;">
-          Final child cartoon voice recordings are pending production. Optional device voice preview uses your browser's built-in speech synthesizer only when explicitly enabled here.
+          Tap Read to Me or any word to hear the story. The voice depends on your device. No API key is needed.
         </p>
       </section>
 
@@ -2579,7 +2580,140 @@ function kidzoEmbeddedURL(path){
       activeTimers = [];
     }
 
+    // Game narration uses device speech; no server or API credentials.
+    const GAME_VOICE_INSTRUCTIONS = {
+      R01:["Find the matching letter balloon.","Cari belon dengan huruf yang sama."],
+      R02:["Follow the path to trace the letter.","Ikut laluan untuk menulis huruf."],
+      R03:["Match the capital letter with its small letter.","Padankan huruf besar dengan huruf kecil."],
+      R04:["Tap Listen, then choose the letter you hear.","Tekan Dengar, kemudian pilih huruf yang disebut."],
+      R05:["Look at the picture and choose its first letter.","Lihat gambar dan pilih huruf pertamanya."],
+      R06:["Match the picture with the correct word.","Padankan gambar dengan perkataan yang betul."],
+      R07:["Put the letters in order to build the word.","Susun huruf untuk membina perkataan."],
+      R08:["Look at the picture and catch the matching word.","Lihat gambar dan tangkap perkataan yang sepadan."],
+      R09:["Turn over the cards and find the matching pairs.","Buka kad dan cari pasangan yang sepadan."],
+      R10:["Put the word parts together, then blend the word.","Gabungkan bahagian perkataan, kemudian baca perkataan itu."],
+      M01:["Choose the missing number to complete the train.","Pilih nombor yang hilang untuk melengkapkan kereta api."],
+      M02:["Count and serve the food the animal needs.","Kira dan hidangkan makanan yang diperlukan haiwan."],
+      M03:["Follow the path to trace the number.","Ikut laluan untuk menulis nombor."],
+      M04:["Count the fruit into the correct baskets.","Kira dan masukkan buah ke dalam bakul yang betul."],
+      M05:["Put the groups together and count how many altogether.","Gabungkan kumpulan dan kira jumlah semuanya."],
+      M06:["Take some away, then count how many are left.","Keluarkan sebahagian, kemudian kira berapa yang tinggal."],
+      M07:["Compare the groups and choose your answer.","Bandingkan kumpulan dan pilih jawapan kamu."],
+      M08:["Follow the numbers in order to find the way.","Ikut nombor mengikut urutan untuk mencari jalan."],
+      M09:["Count the coins to pay for the toy.","Kira syiling untuk membayar harga mainan."],
+      M10:["Join the numbered dots in order to reveal the picture.","Sambungkan titik bernombor mengikut urutan untuk melihat gambar."],
+      D01:["Listen to the animal sound, then choose the animal.","Dengar bunyi haiwan, kemudian pilih haiwan itu."],
+      D02:["Match the animal with its home.","Padankan haiwan dengan tempat tinggalnya."],
+      D03:["Choose where the vehicle travels.","Pilih tempat kenderaan itu bergerak."],
+      D04:["Choose two colours and mix them together.","Pilih dua warna dan campurkan bersama."],
+      D05:["Choose the shapes and put them in the correct spaces.","Pilih bentuk dan letakkan di ruang yang betul."],
+      D06:["Match each label with the correct body part.","Padankan setiap label dengan anggota badan yang betul."],
+      D07:["Put the puzzle pieces in the correct spaces.","Letakkan kepingan puzzle di ruang yang betul."],
+      D08:["Choose your colours and colour the picture.","Pilih warna dan warnakan gambar."],
+      D09:["Choose your tools and make your own picture.","Pilih alat dan hasilkan lukisan kamu sendiri."],
+      D10:["Put the pictures in the correct order.","Susun gambar mengikut urutan yang betul."]
+    };
+    let gameVoiceSerial = 0;
+    let activeGameUtterance = null;
+    let lastGameVoiceView = "";
+    let lastGameFeedbackAt = 0;
+    const gameVoiceURIs = {};
+    function gameVoiceStatus(text) {
+      const el = document.getElementById("gameVoiceStatus");
+      if (el) el.textContent = text;
+    }
+    function stopGameVoice() {
+      gameVoiceSerial++;
+      if (activeGameUtterance && "speechSynthesis" in window) {
+        try { window.speechSynthesis.cancel(); } catch (_) {}
+      }
+      activeGameUtterance = null;
+    }
+    function speakGameVoice(text) {
+      if (!state.settings.gameVoiceEnabled || !/^play-[rmd]\d{2}$/.test(state.route)) return false;
+      stopGameVoice();
+      const bm = state.lang === "bm", lang = bm ? "ms-MY" : "en-US";
+      if (!("speechSynthesis" in window) || typeof SpeechSynthesisUtterance === "undefined") {
+        gameVoiceStatus(bm ? "Bacaan suara tidak tersedia pada pelayar ini." : "Speech is not available in this browser.");
+        return false;
+      }
+      const serial = gameVoiceSerial, route = state.route;
+      try {
+        // Cancel story/letter speech too; retain existing game sounds and state.
+        window.speechSynthesis.cancel();
+        const voices = window.speechSynthesis.getVoices().filter(v => v.lang.toLowerCase().split(/[-_]/)[0] === (bm ? "ms" : "en"));
+        const preferred = /female|woman|samantha|zira|aria|jenny|susan|sara|hazel|yasmin/i;
+        const voice = voices.find(v => v.voiceURI === gameVoiceURIs[lang])
+          || voices.find(v => v.lang.toLowerCase() === lang.toLowerCase() && preferred.test(v.name))
+          || voices.find(v => preferred.test(v.name))
+          || voices.find(v => v.lang.toLowerCase() === lang.toLowerCase()) || voices[0];
+        const utter = new SpeechSynthesisUtterance(text);
+        if (voice) { utter.voice = voice; gameVoiceURIs[lang] = voice.voiceURI; }
+        utter.lang = voice ? voice.lang : lang;
+        utter.rate = 1; utter.pitch = 1; utter.volume = 1;
+        activeGameUtterance = utter;
+        const complete = failed => {
+          if (serial !== gameVoiceSerial || state.route !== route) return;
+          activeGameUtterance = null;
+          if (failed) gameVoiceStatus(bm ? "Suara belum dapat dimainkan. Tekan Dengar Arahan untuk cuba lagi." : "Could not play the voice. Tap Hear Instructions to try again.");
+        };
+        utter.onend = () => complete(false);
+        utter.onerror = () => complete(true);
+        gameVoiceStatus(text);
+        if (window.speechSynthesis.paused) window.speechSynthesis.resume();
+        window.speechSynthesis.speak(utter);
+        return true;
+      } catch (_) {
+        activeGameUtterance = null;
+        gameVoiceStatus(bm ? "Suara belum dapat dimainkan. Cuba lagi." : "Could not play the voice. Please try again.");
+        return false;
+      }
+    }
+    function gameVoiceInstruction() {
+      const id = state.route.replace("play-", "").toUpperCase();
+      const text = GAME_VOICE_INSTRUCTIONS[id];
+      return text ? text[state.lang === "bm" ? 1 : 0] : "";
+    }
+    function speakGameInstruction() {
+      const text = gameVoiceInstruction();
+      return text ? speakGameVoice(text) : false;
+    }
+    function gameVoiceFeedback(key) {
+      if (!state.settings.gameVoiceEnabled || !/^play-[rmd]\d{2}$/.test(state.route)) return;
+      const words = {correct:["Well done!","Bagus! Betul!"],retry:["Try again. You can do it!","Cuba lagi. Kamu boleh!"],complete:["Amazing! You finished!","Hebat! Kamu dah selesai!"]};
+      if (!words[key]) return;
+      const now = Date.now();
+      if (key !== "complete" && now - lastGameFeedbackAt < 900) return;
+      lastGameFeedbackAt = now;
+      speakGameVoice(words[key][state.lang === "bm" ? 1 : 0]);
+    }
+    function bindGameVoiceControls() {
+      const text = gameVoiceInstruction();
+      if (!text) { if (lastGameVoiceView) stopGameVoice(); lastGameVoiceView = ""; return; }
+      const host = document.getElementById("mainView"), header = host.querySelector(".panel-header");
+      if (!header) return;
+      const bm = state.lang === "bm";
+      const button = document.createElement("button");
+      button.type = "button"; button.className = "reader-btn"; button.id = "btnHearGameInstructions";
+      button.textContent = bm ? "🔊 Dengar Arahan" : "🔊 Hear Instructions";
+      button.onclick = speakGameInstruction;
+      header.appendChild(button);
+      const status = document.createElement("p");
+      status.id = "gameVoiceStatus"; status.setAttribute("role","status"); status.setAttribute("aria-live","polite");
+      status.style.cssText = "font-size:.9rem;text-align:center;min-height:1.2em";
+      header.insertAdjacentElement("afterend",status);
+      const view = state.route + ":" + state.lang;
+      if (view !== lastGameVoiceView) { lastGameVoiceView = view; lastGameFeedbackAt = 0; speakGameInstruction(); }
+    }
+
+    let storySpeechSequence = 0;
+    let storyVoiceURI = null;
+    let activeStoryUtterance = null;
+
     function stopAllSpeechAndAudio() {
+      stopGameVoice();
+      storySpeechSequence++;
+      activeStoryUtterance = null;
  stopNatureCall();
       cancelMysterySpeech();
       activeSfxSources.forEach(source => { try { source.stop(); } catch (_) {} });
@@ -2596,6 +2730,7 @@ function kidzoEmbeddedURL(path){
     }
 
     function playSfx(key) {
+      gameVoiceFeedback(key);
       if (!state.settings.sfxEnabled) return;
       unlockSfx();
       if (sfxContext && sfxDecoding[key]) {
@@ -2630,26 +2765,57 @@ function kidzoEmbeddedURL(path){
       } catch (_) {}
     }
 
+    function storyVoiceMessage(message) {
+      const status = document.getElementById("storyVoiceStatus");
+      if (status) status.textContent = message;
+    }
+
     function speakOptionalPreview(text, onEnd) {
       stopAllSpeechAndAudio();
+      const bm = state.lang === "bm";
+      const finish = () => { if (typeof onEnd === "function") onEnd(); };
       if (!state.settings.deviceVoicePreview) {
-        if (typeof onEnd === "function") onEnd();
+        finish();
+        storyVoiceMessage(bm ? "Aktifkan Suara Cerita dalam Tetapan." : "Turn on Story Voice in Settings.");
         return false;
       }
-      if (!("speechSynthesis" in window)) {
-        if (typeof onEnd === "function") onEnd();
+      if (!("speechSynthesis" in window) || typeof SpeechSynthesisUtterance === "undefined") {
+        finish();
+        storyVoiceMessage(bm ? "Bacaan suara tidak tersedia pada pelayar ini." : "Speech is not available in this browser.");
         return false;
       }
+      const sequence = storySpeechSequence;
       try {
+        const synth = window.speechSynthesis;
+        const voices = synth.getVoices().filter(v => /^en(?:[-_]|$)/i.test(v.lang));
+        const voice = voices.find(v => v.voiceURI === storyVoiceURI)
+          || voices.find(v => /^en[-_]US$/i.test(v.lang) && v.localService)
+          || voices.find(v => /^en[-_]US$/i.test(v.lang))
+          || voices.find(v => v.localService) || voices[0];
+        if (voice) storyVoiceURI = voice.voiceURI;
         const utter = new SpeechSynthesisUtterance(text);
-        utter.lang = "en-US";
-        utter.rate = 0.92;
-        utter.onend = () => { if (typeof onEnd === "function") onEnd(); };
-        utter.onerror = () => { if (typeof onEnd === "function") onEnd(); };
-        window.speechSynthesis.speak(utter);
+        activeStoryUtterance = utter;
+        if (voice) utter.voice = voice;
+        utter.lang = voice ? voice.lang : "en-US";
+        utter.rate = 1;
+        utter.pitch = 1;
+        utter.volume = 1;
+        const complete = (failed) => {
+          if (sequence !== storySpeechSequence) return;
+          activeStoryUtterance = null;
+          finish();
+          storyVoiceMessage(failed ? (bm ? "Suara belum dapat dimainkan. Semak tetapan suara peranti dan cuba lagi." : "Could not play the voice. Check your device speech settings and try again.") : "");
+        };
+        utter.onend = () => complete(false);
+        utter.onerror = () => complete(true);
+        storyVoiceMessage("");
+        if (synth.paused) synth.resume();
+        synth.speak(utter);
         return true;
       } catch (_) {
-        if (typeof onEnd === "function") onEnd();
+        activeStoryUtterance = null;
+        finish();
+        storyVoiceMessage(bm ? "Suara belum dapat dimainkan. Cuba lagi." : "Could not play the voice. Please try again.");
         return false;
       }
     }
@@ -2673,7 +2839,8 @@ function kidzoEmbeddedURL(path){
       syncStatus: "Local device preview (sign in to test cloud sync)",
       settings: {
         sfxEnabled: true,
-        deviceVoicePreview: false
+        deviceVoicePreview: true,
+        gameVoiceEnabled: true
       },
       progress: createEmptyProgress(),
       // Active M01 Train session state
@@ -5309,7 +5476,7 @@ function changeStoryPage(delta){if(state.route!=='read-story'||state.reader.load
 
 function renderStoriesBookshelf(t){const ready=STORYBOOKS.filter(b=>b.ready).length,bm=state.lang==='bm';return `<section class="panel story-shelf-panel"><div class="panel-header"><h2>${t.storybooksTitle} (35)</h2><button class="btn-back" type="button" data-nav="home">← ${t.back}</button></div><div class="story-shelf-note"><strong>${ready}/35 ${bm?'buku tersedia':'books ready'}</strong><span>${t.storySavedNote}</span></div><div class="catalogue-grid">${STORYBOOKS.map(book=>{const saved=state.progress.stories[book.id],resume=saved&&saved.lastPage>0&&!saved.completed;return `<article class="item-card ${book.ready?'ready':''}"><div><div class="item-card-top"><span class="code-tag">${book.id}</span><span class="status-pill ${book.ready?'status-ready':'status-soon'}">${book.ready?(saved?.completed?(bm?'Selesai ★':'Completed ★'):t.readyBadge):t.soonBadge}</span></div>${book.ready?`<button type="button" class="story-cover-open" data-open-story="${book.id}" aria-label="${escapeStoryText(book.title)}"><span class="story-cover-thumb" style="${storyArtworkStyle(book,0,true)}" role="img" aria-label="${escapeStoryText(book.title)} cover"></span></button>`:''}<h3>${escapeStoryText(book.title)}</h3><p>${book.ready?`${book.pages.length} illustrated English pages`:(book.synopsis||'')}</p></div>${book.ready?`<button class="card-action-btn launch" type="button" data-open-story="${book.id}">${resume?`${t.readNow} (P.${Math.min(saved.lastPage+1,book.pages.length)}/${book.pages.length})`:saved?.completed?(bm?'Baca Semula':'Read Again'):t.readNow}</button>`:`<button class="card-action-btn disabled" type="button" disabled>${t.soonBadge}</button>`}</article>`;}).join('')}</div></section>`;}
 
-function renderStoryReader(t){const book=STORYBOOKS.find(b=>b.id===state.reader.storyId)||STORYBOOKS[0],idx=Math.max(0,Math.min(state.reader.pageIndex,book.pages.length-1)),page=book.pages[idx],reader=state.reader,bm=state.lang==='bm';const error=reader.artError,loading=reader.loading;return `<section class="panel story-reader-panel" style="--story-accent:${book.accent||'#2c8bba'}"><div class="panel-header"><h2>${escapeStoryText(book.title)}</h2><button class="btn-back" type="button" data-nav="stories">← ${t.navStories}</button></div><div class="reader-frame"><div class="storybook-page-count">${t.storyPage} ${idx+1} / ${book.pages.length}</div><div class="story-art-box ${loading||error?'story-loading-art':''}" style="${loading||error?'':storyArtworkStyle(book,idx)}" role="img" aria-label="${escapeStoryText(page.text)}">${loading?`<div class="story-art-missing" role="status" aria-busy="true">${bm?'Menyediakan gambar buku…':'Getting your story pictures ready…'}</div>`:error?`<div class="story-art-missing" role="status"><span>${bm?'Gambar belum berjaya dimuatkan. Semak sambungan dan cuba semula.':'The picture could not load. Check your connection and try again.'}</span><button type="button" class="reader-btn primary" id="btnStoryRetryArt">${bm?'Cuba Semula':'Try Again'}</button></div>`:''}</div><div class="sentence-box" lang="en" aria-label="Interactive English story sentence">${page.text.split(' ').map((w,i)=>`<button type="button" class="word-chip ${reader.activeWordIdx===i?'speaking':''}" data-word-idx="${i}" data-word-text="${escapeStoryText(w)}">${escapeStoryText(w)}</button>`).join('')}</div><div class="reader-controls"><button class="reader-btn" type="button" id="btnStoryPrev" ${idx===0||loading||error?'disabled':''}>← ${t.prevPage}</button><button class="reader-btn primary" type="button" id="btnReadSentence">${t.readToMe}</button><button class="reader-btn" type="button" id="btnListenAgain">${t.listenAgain}</button><button class="reader-btn primary" type="button" id="btnStoryNext" ${loading||error?'disabled':''}>${idx===book.pages.length-1?t.finishBook:`${t.nextPage} →`}</button></div><button type="button" class="reader-btn story-restart" id="btnStoryRestart" ${idx===0||loading?'disabled':''}>${bm?'Mula dari Halaman 1':'Start from Page 1'}</button></div></section>`;}
+function renderStoryReader(t){const book=STORYBOOKS.find(b=>b.id===state.reader.storyId)||STORYBOOKS[0],idx=Math.max(0,Math.min(state.reader.pageIndex,book.pages.length-1)),page=book.pages[idx],reader=state.reader,bm=state.lang==='bm';const error=reader.artError,loading=reader.loading;return `<section class="panel story-reader-panel" style="--story-accent:${book.accent||'#2c8bba'}"><div class="panel-header"><h2>${escapeStoryText(book.title)}</h2><button class="btn-back" type="button" data-nav="stories">← ${t.navStories}</button></div><div class="reader-frame"><div class="storybook-page-count">${t.storyPage} ${idx+1} / ${book.pages.length}</div><div class="story-art-box ${loading||error?'story-loading-art':''}" style="${loading||error?'':storyArtworkStyle(book,idx)}" role="img" aria-label="${escapeStoryText(page.text)}">${loading?`<div class="story-art-missing" role="status" aria-busy="true">${bm?'Menyediakan gambar buku…':'Getting your story pictures ready…'}</div>`:error?`<div class="story-art-missing" role="status"><span>${bm?'Gambar belum berjaya dimuatkan. Semak sambungan dan cuba semula.':'The picture could not load. Check your connection and try again.'}</span><button type="button" class="reader-btn primary" id="btnStoryRetryArt">${bm?'Cuba Semula':'Try Again'}</button></div>`:''}</div><div class="sentence-box" lang="en" aria-label="Interactive English story sentence">${page.text.split(' ').map((w,i)=>`<button type="button" class="word-chip ${reader.activeWordIdx===i?'speaking':''}" data-word-idx="${i}" data-word-text="${escapeStoryText(w)}">${escapeStoryText(w)}</button>`).join('')}</div><div class="reader-controls"><button class="reader-btn" type="button" id="btnStoryPrev" ${idx===0||loading||error?'disabled':''}>← ${t.prevPage}</button><button class="reader-btn primary" type="button" id="btnReadSentence">${t.readToMe}</button><button class="reader-btn" type="button" id="btnListenAgain">${t.listenAgain}</button><button class="reader-btn primary" type="button" id="btnStoryNext" ${loading||error?'disabled':''}>${idx===book.pages.length-1?t.finishBook:`${t.nextPage} →`}</button></div><p id="storyVoiceStatus" role="status" aria-live="polite" style="text-align:center"></p><button type="button" class="reader-btn story-restart" id="btnStoryRestart" ${idx===0||loading?'disabled':''}>${bm?'Mula dari Halaman 1':'Start from Page 1'}</button></div></section>`;}
 
     function renderStarsProgress(t) {
       const r01 = state.progress.games["R01"] || { starsEarned: 0, bestRounds: 0, completed: false };
@@ -5989,6 +6156,7 @@ function bindStoryBatchControls(){const retry=document.getElementById('btnStoryR
       else if (state.route === "progress") main.innerHTML = renderStarsProgress(t);
 
       bindDynamicEvents();
+      bindGameVoiceControls();
     }
 
     function bindDynamicEvents() {
@@ -6160,8 +6328,9 @@ function bindStoryBatchControls(){const retry=document.getElementById('btnStoryR
 
       document.getElementById("btnToggleSfxModal").textContent =
         `Sound Effects: ${state.settings.sfxEnabled ? "ON" : "OFF"}`;
+      document.getElementById("btnToggleGameVoice").textContent = `Game Voice: ${state.settings.gameVoiceEnabled ? "ON" : "OFF"}`;
       document.getElementById("btnToggleDeviceVoice").textContent =
-        `Optional Device Voice Preview: ${state.settings.deviceVoicePreview ? "ON" : "OFF"}`;
+        `Story Voice: ${state.settings.deviceVoicePreview ? "ON" : "OFF"}`;
     }
 
     // Language switch without corrupting active round or duplicating stars
@@ -6210,6 +6379,12 @@ function bindStoryBatchControls(){const retry=document.getElementById('btnStoryR
       if (!state.settings.sfxEnabled) stopAllSpeechAndAudio();
       updateAccountBanner();
       render();
+    };
+
+    document.getElementById("btnToggleGameVoice").onclick = () => {
+      state.settings.gameVoiceEnabled = !state.settings.gameVoiceEnabled;
+      if (!state.settings.gameVoiceEnabled) stopGameVoice();
+      updateAccountBanner();
     };
 
     document.getElementById("btnToggleDeviceVoice").onclick = () => {
