@@ -2949,7 +2949,7 @@ function kidzoEmbeddedURL(path){
         activeStoryUtterance = utter;
         if (voice) utter.voice = voice;
         utter.lang = voice ? voice.lang : "en-US";
-        utter.rate = 1;
+        utter.rate = .8;
         utter.pitch = 1;
         utter.volume = 1;
         const complete = (failed) => {
@@ -5237,6 +5237,7 @@ function changeStoryPage(delta){if(state.route!=='read-story'||state.reader.load
       const sequence=storySpeechSequence;let done=false;
       const valid=()=>!done&&sequence===storySpeechSequence&&state.route==="read-story"&&state.reader===reader&&reader.pageIndex===page;
       const audio=new Audio(word?clip:"audio/stories/"+reader.storyId+"/page-"+(page+1)+".mp3");activeStoryRecording=audio;
+      audio.defaultPlaybackRate=audio.playbackRate=.8;audio.preservesPitch=true;audio.webkitPreservesPitch=true;
       const finish=failed=>{if(!valid())return;done=true;activeStoryRecording=null;if(word){reader.activeWordIdx=-1;render();}storyVoiceMessage(failed?(state.lang==="bm"?"Audio belum dapat dimainkan. Tekan sekali lagi untuk cuba semula.":"Audio could not play. Tap again to retry."):"");};
       audio.onended=()=>finish(false);audio.onerror=()=>finish(true);audio.onplay=()=>{if(!valid())audio.pause();};
       storyVoiceMessage("");try{const pending=audio.play();if(pending)pending.catch(()=>finish(true));}catch(_){finish(true);}render();return true;
