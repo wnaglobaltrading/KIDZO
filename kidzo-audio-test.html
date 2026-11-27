@@ -5252,7 +5252,6 @@ function kidzoEmbeddedURL(path){
     }
 
     
-async 
 function prepareStoryAudio(reader=state.reader){
  if(window.KIDZO_STORY_AUDIO)return Promise.resolve(true);
  const current=()=>state.route==='read-story'&&state.reader===reader;
@@ -5266,7 +5265,7 @@ function prepareStoryAudio(reader=state.reader){
  });
 }
 
-function openStory(storyId,restart=false){const book=STORYBOOKS.find(b=>b.id===storyId);if(!book?.ready||!book.pages?.length)return false;cancelTrailActivity();cancelNumberTrailActivity();clearAllTimers();stopAllSpeechAndAudio();const saved=state.progress.stories[storyId],startPage=!restart&&!saved?.completed&&Number.isInteger(saved?.lastPage)?Math.min(Math.max(0,saved.lastPage),book.pages.length-1):0;const reader={storyId,pageIndex:startPage,activeWordIdx:-1,loading:true,artError:false};state.reader=reader;persistStoryProgress(storyId,startPage,false);state.route='read-story';const artwork=loadStoryArtwork(reader);prepareStoryAudio(reader);return artwork;}
+async function openStory(storyId,restart=false){const book=STORYBOOKS.find(b=>b.id===storyId);if(!book?.ready||!book.pages?.length)return false;cancelTrailActivity();cancelNumberTrailActivity();clearAllTimers();stopAllSpeechAndAudio();const saved=state.progress.stories[storyId],startPage=!restart&&!saved?.completed&&Number.isInteger(saved?.lastPage)?Math.min(Math.max(0,saved.lastPage),book.pages.length-1):0;const reader={storyId,pageIndex:startPage,activeWordIdx:-1,loading:true,artError:false};state.reader=reader;persistStoryProgress(storyId,startPage,false);state.route='read-story';const artwork=loadStoryArtwork(reader);prepareStoryAudio(reader);return artwork;}
 
     function persistStoryProgress(storyId, pageIndex, completed) {
       const prev = state.progress.stories[storyId] || { lastPage: 0, completed: false };
