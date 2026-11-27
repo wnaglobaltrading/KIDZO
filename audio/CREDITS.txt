@@ -1,0 +1,2 @@
+KIDZO sound effects: original synthetic effects created for this project.
+Animal recordings: existing project assets. Individual sources, authors and licenses are recorded in animal-sources.json (26 CC0, 4 US federal works).

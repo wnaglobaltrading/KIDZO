@@ -1,0 +1,323 @@
+[
+  {
+    "id": "cow",
+    "url": "https://eltrivia.com/js/kids/animal-quiz/assets/audio/cow.mp3",
+    "page": "https://eltrivia.com/credits/",
+    "bytes": 32599,
+    "author": "Mystikuum",
+    "license": "CC0",
+    "source": "https://freesound.org/people/Mystikuum/sounds/401636/",
+    "duration": 3.892245,
+    "file": "audio/animals/cow.mp3"
+  },
+  {
+    "id": "sheep",
+    "url": "https://eltrivia.com/js/kids/animal-quiz/assets/audio/sheep.mp3",
+    "page": "https://eltrivia.com/credits/",
+    "bytes": 30510,
+    "author": "satoristudios3",
+    "license": "CC0",
+    "source": "https://freesound.org/people/satoristudios3/sounds/692900/",
+    "duration": 3.526531,
+    "file": "audio/animals/sheep.mp3"
+  },
+  {
+    "id": "horse",
+    "url": "https://eltrivia.com/js/kids/animal-quiz/assets/audio/horse.mp3",
+    "page": "https://eltrivia.com/credits/",
+    "bytes": 32599,
+    "author": "3bagbrew",
+    "license": "CC0",
+    "source": "https://freesound.org/people/3bagbrew/sounds/59569/",
+    "duration": 3.970612,
+    "file": "audio/animals/horse.mp3"
+  },
+  {
+    "id": "duck",
+    "url": "https://eltrivia.com/js/kids/animal-quiz/assets/audio/duck.mp3",
+    "page": "https://eltrivia.com/credits/",
+    "bytes": 32599,
+    "author": "WavJunction.com",
+    "license": "CC0",
+    "source": "https://freesound.org/people/WavJunction.com/sounds/456770/",
+    "duration": 3.94449,
+    "file": "audio/animals/duck.mp3"
+  },
+  {
+    "id": "chicken",
+    "url": "https://eltrivia.com/js/kids/animal-quiz/assets/audio/chicken.mp3",
+    "page": "https://eltrivia.com/credits/",
+    "bytes": 32599,
+    "author": "Breviceps",
+    "license": "CC0",
+    "source": "https://freesound.org/people/Breviceps/sounds/456803/",
+    "duration": 3.892245,
+    "file": "audio/animals/chicken.mp3"
+  },
+  {
+    "id": "rooster",
+    "url": "https://eltrivia.com/js/kids/animal-quiz/assets/audio/rooster.mp3",
+    "page": "https://eltrivia.com/credits/",
+    "bytes": 32599,
+    "author": "jsbarrett",
+    "license": "CC0",
+    "source": "https://freesound.org/people/jsbarrett/sounds/200339/",
+    "duration": 2.742857,
+    "file": "audio/animals/rooster.mp3"
+  },
+  {
+    "id": "goat",
+    "url": "https://eltrivia.com/js/kids/animal-quiz/assets/audio/goat.mp3",
+    "page": "https://eltrivia.com/credits/",
+    "bytes": 32599,
+    "author": "Kinoton",
+    "license": "CC0",
+    "source": "https://freesound.org/people/Kinoton/sounds/581240/",
+    "duration": 3.604898,
+    "file": "audio/animals/goat.mp3"
+  },
+  {
+    "id": "donkey",
+    "url": "https://eltrivia.com/js/kids/animal-quiz/assets/audio/donkey.mp3",
+    "page": "https://eltrivia.com/credits/",
+    "bytes": 32599,
+    "author": "felix.blume",
+    "license": "CC0",
+    "source": "https://freesound.org/people/felix.blume/sounds/705300/",
+    "duration": 3.970612,
+    "file": "audio/animals/donkey.mp3"
+  },
+  {
+    "id": "dog",
+    "url": "https://eltrivia.com/js/kids/animal-quiz/assets/audio/dog.mp3",
+    "page": "https://eltrivia.com/credits/",
+    "bytes": 32181,
+    "author": "aunrea",
+    "license": "CC0",
+    "source": "https://freesound.org/people/aunrea/sounds/495658/",
+    "duration": 3.813878,
+    "file": "audio/animals/dog.mp3"
+  },
+  {
+    "id": "cat",
+    "url": "https://eltrivia.com/js/kids/animal-quiz/assets/audio/cat.mp3",
+    "page": "https://eltrivia.com/credits/",
+    "bytes": 12955,
+    "author": "tuberatanka",
+    "license": "CC0",
+    "source": "https://freesound.org/people/tuberatanka/sounds/110011/",
+    "duration": 1.38449,
+    "file": "audio/animals/cat.mp3"
+  },
+  {
+    "id": "lion",
+    "url": "https://eltrivia.com/js/kids/animal-quiz/assets/audio/lion.mp3",
+    "page": "https://eltrivia.com/credits/",
+    "bytes": 32599,
+    "author": "Filmscore",
+    "license": "CC0",
+    "source": "https://freesound.org/people/Filmscore/sounds/869002/",
+    "duration": 3.94449,
+    "file": "audio/animals/lion.mp3"
+  },
+  {
+    "id": "elephant",
+    "url": "https://eltrivia.com/js/kids/animal-quiz/assets/audio/elephant.mp3",
+    "page": "https://eltrivia.com/credits/",
+    "bytes": 32599,
+    "author": "ikbenraar",
+    "license": "CC0",
+    "source": "https://freesound.org/people/ikbenraar/sounds/819668/",
+    "duration": 3.970612,
+    "file": "audio/animals/elephant.mp3"
+  },
+  {
+    "id": "monkey",
+    "url": "https://eltrivia.com/js/kids/animal-quiz/assets/audio/monkey.mp3",
+    "page": "https://eltrivia.com/credits/",
+    "bytes": 27166,
+    "author": "Bidone",
+    "license": "CC0",
+    "source": "https://freesound.org/people/Bidone/sounds/67361/",
+    "duration": 3.213061,
+    "file": "audio/animals/monkey.mp3"
+  },
+  {
+    "id": "wolf",
+    "url": "https://eltrivia.com/js/kids/animal-quiz/assets/audio/wolf.mp3",
+    "page": "https://eltrivia.com/credits/",
+    "bytes": 32599,
+    "author": "NPS",
+    "license": "US federal work",
+    "source": "https://www.nps.gov/subjects/sound/sounds-wolf.htm",
+    "duration": 3.94449,
+    "file": "audio/animals/wolf.mp3"
+  },
+  {
+    "id": "frog",
+    "url": "https://eltrivia.com/js/kids/animal-quiz/assets/audio/frog.mp3",
+    "page": "https://eltrivia.com/credits/",
+    "bytes": 17135,
+    "author": "NPS",
+    "license": "US federal work",
+    "source": "https://www.nps.gov/subjects/sound/sounds-pigfrog.htm",
+    "duration": 1.933061,
+    "file": "audio/animals/frog.mp3"
+  },
+  {
+    "id": "owl",
+    "url": "https://eltrivia.com/js/kids/animal-quiz/assets/audio/owl.mp3",
+    "page": "https://eltrivia.com/credits/",
+    "bytes": 32599,
+    "author": "Patrick_Corra",
+    "license": "CC0",
+    "source": "https://freesound.org/people/Patrick_Corra/sounds/745208/",
+    "duration": 3.970612,
+    "file": "audio/animals/owl.mp3"
+  },
+  {
+    "id": "bee",
+    "url": "https://eltrivia.com/js/kids/animal-quiz/assets/audio/bee.mp3",
+    "page": "https://eltrivia.com/credits/",
+    "bytes": 23195,
+    "author": "NPS",
+    "license": "US federal work",
+    "source": "https://www.nps.gov/subjects/sound/sounds-bee.htm",
+    "duration": 2.76898,
+    "file": "audio/animals/bee.mp3"
+  },
+  {
+    "id": "snake",
+    "url": "https://eltrivia.com/js/kids/animal-quiz/assets/audio/snake.mp3",
+    "page": "https://eltrivia.com/credits/",
+    "bytes": 32599,
+    "author": "7h3_lark",
+    "license": "CC0",
+    "source": "https://freesound.org/people/7h3_lark/sounds/268580/",
+    "duration": 3.94449,
+    "file": "audio/animals/snake.mp3"
+  },
+  {
+    "id": "sea-lion",
+    "url": "https://eltrivia.com/js/kids/animal-quiz/assets/audio/sea-lion.mp3",
+    "page": "https://eltrivia.com/credits/",
+    "bytes": 27166,
+    "author": "nifvimp",
+    "license": "CC0",
+    "source": "https://freesound.org/people/nifvimp/sounds/680735/",
+    "duration": 3.291429,
+    "file": "audio/animals/sea-lion.mp3"
+  },
+  {
+    "id": "crow",
+    "url": "https://eltrivia.com/js/kids/animal-quiz/assets/audio/crow.mp3",
+    "page": "https://eltrivia.com/credits/",
+    "bytes": 32599,
+    "author": "Mish7913",
+    "license": "CC0",
+    "source": "https://freesound.org/people/Mish7913/sounds/741366/",
+    "duration": 3.970612,
+    "file": "audio/animals/crow.mp3"
+  },
+  {
+    "id": "songbird",
+    "url": "https://eltrivia.com/js/kids/animal-quiz/assets/audio/songbird.mp3",
+    "page": "https://eltrivia.com/credits/",
+    "bytes": 28629,
+    "author": "NPS",
+    "license": "US federal work",
+    "source": "https://www.nps.gov/subjects/sound/sounds-american-robin.htm",
+    "duration": 3.448163,
+    "file": "audio/animals/songbird.mp3"
+  },
+  {
+    "id": "goose",
+    "url": "https://cdn.freesound.org/previews/805/805297_17326459-hq.mp3",
+    "author": "jahjahjahjah",
+    "license": "CC0",
+    "source": "https://freesound.org/people/jahjahjahjah/sounds/805297/",
+    "bytes": 14610,
+    "duration": 0.496327,
+    "file": "audio/animals/goose.mp3"
+  },
+  {
+    "id": "turkey",
+    "url": "https://cdn.freesound.org/previews/233/233123_4056007-hq.mp3",
+    "author": "JarredGibb",
+    "license": "CC0",
+    "source": "https://freesound.org/people/JarredGibb/sounds/233123/",
+    "bytes": 25632,
+    "duration": 0.966531,
+    "file": "audio/animals/turkey.mp3"
+  },
+  {
+    "id": "peacock",
+    "url": "https://cdn.freesound.org/previews/810/810711_1481531-hq.mp3",
+    "author": "richwise",
+    "license": "CC0",
+    "source": "https://freesound.org/people/richwise/sounds/810711/",
+    "bytes": 181584,
+    "duration": 5.041633,
+    "file": "audio/animals/peacock.mp3"
+  },
+  {
+    "id": "pigeon",
+    "url": "https://cdn.freesound.org/previews/649/649390_1629501-hq.mp3",
+    "author": "5ro4",
+    "license": "CC0",
+    "source": "https://freesound.org/people/5ro4/sounds/649390/",
+    "bytes": 107917,
+    "duration": 4.362449,
+    "file": "audio/animals/pigeon.mp3"
+  },
+  {
+    "id": "seagull",
+    "url": "https://cdn.freesound.org/previews/586/586831_262674-hq.mp3",
+    "author": "speakingmusic",
+    "license": "CC0",
+    "source": "https://freesound.org/people/speakingmusic/sounds/586831/",
+    "bytes": 597122,
+    "duration": 5.041633,
+    "file": "audio/animals/seagull.mp3"
+  },
+  {
+    "id": "tiger",
+    "url": "https://cdn.freesound.org/previews/67/67357_706955-hq.mp3",
+    "author": "Bidone",
+    "license": "CC0",
+    "source": "https://freesound.org/people/Bidone/sounds/67357/",
+    "bytes": 35794,
+    "duration": 1.227755,
+    "file": "audio/animals/tiger.mp3"
+  },
+  {
+    "id": "cricket",
+    "url": "https://cdn.freesound.org/previews/363/363111_6612464-hq.mp3",
+    "author": "TheWoodlandNomad",
+    "license": "CC0",
+    "source": "https://freesound.org/people/TheWoodlandNomad/sounds/363111/",
+    "bytes": 1538496,
+    "duration": 5.041633,
+    "file": "audio/animals/cricket.mp3"
+  },
+  {
+    "id": "dolphin",
+    "url": "https://cdn.freesound.org/previews/161/161691_1661766-hq.mp3",
+    "author": "felix.blume",
+    "license": "CC0",
+    "source": "https://freesound.org/people/felix.blume/sounds/161691/",
+    "bytes": 1006464,
+    "duration": 5.041633,
+    "file": "audio/animals/dolphin.mp3"
+  },
+  {
+    "id": "whale",
+    "url": "https://cdn.freesound.org/previews/82/82325_1299633-hq.mp3",
+    "author": "KEVOY",
+    "license": "CC0",
+    "source": "https://freesound.org/people/KEVOY/sounds/82325/",
+    "bytes": 1367075,
+    "duration": 5.041633,
+    "file": "audio/animals/whale.mp3"
+  }
+]
