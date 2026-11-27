@@ -4,6 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
   <title>KIDZO — Playful Learning Garden</title>
+  <meta name="theme-color" content="#19b9d8">
+  <meta name="application-name" content="KIDZO">
+  <meta name="apple-mobile-web-app-title" content="KIDZO">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="manifest" href="kidzo.webmanifest?v=brand-1">
+  <link rel="apple-touch-icon" sizes="180x180" href="kidzo-icon-180.png?v=brand-1">
+  <link rel="icon" type="image/png" sizes="192x192" href="kidzo-icon-192.png?v=brand-1">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
@@ -2218,19 +2227,49 @@ body.kidzo-auth-locked .app-shell,body.kidzo-auth-locked #settingsModal{display:
 .kidzo-login-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}.kidzo-login-actions button{flex:1}.kidzo-login-card .login-reset{border:0;background:none;display:block;margin:8px auto;text-decoration:underline}
 #kidzoLoginStatus{min-height:24px;font-size:.95rem;color:#33546c;overflow-wrap:anywhere}#kidzoLoginStatus[data-error="true"]{color:#a1263c}
 .kidzo-login-card :focus-visible{outline:3px solid #ef9c00;outline-offset:3px}
+
+/* Kidzo account welcome screen: isolated from game layouts. */
+#kidzoLogin{background:radial-gradient(ellipse at 14% 12%,#bff4ff 0,transparent 45%),linear-gradient(150deg,#16b7dc,#54d7e5 50%,#defaff);padding:24px 16px;padding-top:max(24px,env(safe-area-inset-top));padding-bottom:max(24px,env(safe-area-inset-bottom));box-sizing:border-box}
+.kidzo-login-card{max-width:440px;padding:0;overflow:hidden;background:#fff;border:2px solid #ffffff9c;border-radius:32px;box-shadow:0 18px 55px #00537c35}
+.kidzo-login-header{position:relative;padding:25px 24px 30px;background:linear-gradient(155deg,#29c9e8,#06a8d1);text-align:center;isolation:isolate}
+.kidzo-login-header:after{content:"";position:absolute;z-index:-1;bottom:-1px;left:-10%;width:120%;height:32px;background:#fff;border-radius:50% 50% 0 0/100% 100% 0 0}
+.kidzo-login-mascot{width:104px;height:104px;display:block;object-fit:cover;margin:0 auto 9px;border:5px solid white;border-radius:50%;box-shadow:0 6px 0 #007ca522,0 8px 24px #00617e26;background:#d9f7ff}
+.kidzo-login-brand{color:#fff;font-size:2rem;letter-spacing:1.5px;margin:0;text-shadow:0 2px 0 #087b9f22}
+.kidzo-login-content{padding:3px clamp(20px,5vw,32px) 22px}
+.kidzo-login-card h1{font-size:1.65rem;margin:6px 0 8px;color:#284b65}
+.kidzo-login-content>.kidzo-login-intro{font-size:.93rem;color:#526b80;margin:0 auto 17px;max-width:320px;line-height:1.45}
+.kidzo-login-card label{font-size:.95rem;margin:13px 0 6px;color:#2e536d}
+.kidzo-login-card input{background:#effbfe;border:2px solid #b7e8f2;color:#173b55;padding:12px 14px;min-height:49px;border-radius:14px}
+.kidzo-login-card input:focus{border-color:#159fc6}
+.kidzo-password-wrap{position:relative}.kidzo-password-wrap input{padding-right:55px}
+.kidzo-login-card .kidzo-password-toggle{position:absolute;right:3px;top:3px;border:0;background:transparent;min-width:44px;min-height:43px;padding:9px;color:#26718e;border-radius:10px;display:grid;place-items:center}
+.kidzo-password-toggle svg{width:22px;height:22px}
+.kidzo-login-card .login-primary{margin-top:20px;border:0;background:linear-gradient(#22c3df,#07a1ca);box-shadow:0 5px 0 #087caa;color:#fff;min-height:50px}
+.kidzo-login-actions{display:flex;flex-direction:column;gap:10px;margin-top:17px}
+.kidzo-login-card #kidzoLoginGoogle{order:-1;background:white;border:2px solid #cbe6ee;min-height:49px;box-shadow:0 3px 0 #e5f2f6}
+.kidzo-login-card #kidzoLoginSignup{background:#eafbff;border:1px solid #c1e8f1;min-height:44px;font-size:.95rem}
+.kidzo-login-card .login-reset{font-size:.88rem;margin:12px auto 0;min-height:40px;padding:8px;color:#28718d}
+#kidzoLoginStatus{margin:7px 0 0;font-size:.85rem;line-height:1.4;color:#496b7d}
+@media(max-width:380px){#kidzoLogin{padding-left:10px;padding-right:10px}.kidzo-login-header{padding-top:18px;padding-bottom:26px}.kidzo-login-mascot{width:88px;height:88px}.kidzo-login-content{padding-left:18px;padding-right:18px}.kidzo-login-card h1{font-size:1.5rem}}
 </style>
 </head>
 <body class="kidzo-auth-locked">
   <section id="kidzoLogin" aria-labelledby="kidzoLoginTitle">
     <div class="kidzo-login-card">
-      <div class="kidzo-login-brand">KIDZO</div>
+      <div class="kidzo-login-header">
+        <img class="kidzo-login-mascot" src="kidzo-icon-192.png?v=brand-1" width="104" height="104" alt="Kidzo, our friendly blue mascot" fetchpriority="high" decoding="async">
+        <div class="kidzo-login-brand">KIDZO</div>
+      </div>
+      <div class="kidzo-login-content">
       <h1 id="kidzoLoginTitle">Welcome to Kidzo!</h1>
-      <p>Daftar atau log masuk untuk mula bermain dan membaca.<br>Sign up or sign in to play and read.</p>
+      <p class="kidzo-login-intro">Daftar atau log masuk untuk mula bermain dan membaca.<br>Sign up or sign in to play and read.</p>
       <form id="kidzoLoginForm">
         <label for="kidzoLoginEmail">Email</label>
         <input id="kidzoLoginEmail" type="email" autocomplete="email" inputmode="email" required placeholder="parent@example.com">
         <label for="kidzoLoginPassword">Password / Kata laluan</label>
-        <input id="kidzoLoginPassword" type="password" autocomplete="current-password" required minlength="6" placeholder="Minimum 6 characters">
+        <div class="kidzo-password-wrap"><input id="kidzoLoginPassword" type="password" autocomplete="current-password" required minlength="6" placeholder="Minimum 6 characters">
+          <button id="kidzoLoginPasswordToggle" class="kidzo-password-toggle" type="button" aria-label="Show password / Tunjuk kata laluan" aria-pressed="false" aria-controls="kidzoLoginPassword"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></button>
+        </div>
         <button class="login-primary" id="kidzoLoginSubmit" type="submit" disabled>Log Masuk / Sign In</button>
         <div class="kidzo-login-actions">
           <button id="kidzoLoginSignup" type="button" disabled>Daftar / Sign Up</button>
@@ -2239,6 +2278,7 @@ body.kidzo-auth-locked .app-shell,body.kidzo-auth-locked #settingsModal{display:
         <button class="login-reset" id="kidzoLoginReset" type="button" disabled>Lupa kata laluan? / Reset Password</button>
       </form>
       <p id="kidzoLoginStatus" role="status" aria-live="polite">Menyemak akaun… / Checking your account…</p>
+      </div>
     </div>
   </section>
   <script>
@@ -6378,6 +6418,12 @@ function bindStoryBatchControls(){if(!window.KIDZO_STORY_AUDIO)prepareStoryAudio
       finally{kidzoAuthBusy=false;updateKidzoLogin();}
     }
     function bindKidzoLogin(){
+      document.getElementById('kidzoLoginPasswordToggle').onclick=()=>{
+        const input=document.getElementById('kidzoLoginPassword'),button=document.getElementById('kidzoLoginPasswordToggle');
+        const visible=input.type==='password';input.type=visible?'text':'password';
+        button.setAttribute('aria-pressed',String(visible));
+        button.setAttribute('aria-label',visible?'Hide password / Sembunyikan kata laluan':'Show password / Tunjuk kata laluan');
+      };
       document.getElementById('kidzoLoginForm').onsubmit=e=>{e.preventDefault();runKidzoLogin('signin');};
       document.getElementById('kidzoLoginSignup').onclick=()=>runKidzoLogin('signup');
       document.getElementById('kidzoLoginGoogle').onclick=()=>runKidzoLogin('google');
