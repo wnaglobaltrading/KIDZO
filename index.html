@@ -2759,9 +2759,12 @@ function kidzoEmbeddedURL(path){
       if (key !== "complete" && now - lastGameFeedbackAt < 900) return;
       const trainRound = state.train?.roundIndex;
       // One utterance per answer: occasional departure lines replace praise.
-      const category = key === "correct" && state.route === "play-m01"
-        && Number.isInteger(trainRound) && trainRound % 2 === 1 ? "train" : key;
-      const text = nextGameFeedbackLine(category, state.lang === "bm" ? "bm" : "en");
+      const lang = state.lang === "bm" ? "bm" : "en";
+      let text = nextGameFeedbackLine(key, lang);
+      if (key === "correct" && state.route === "play-m01"
+          && Number.isInteger(trainRound) && trainRound % 2 === 1) {
+        text += " " + nextGameFeedbackLine("train", lang);
+      }
       if (text && speakGameVoice(text)) lastGameFeedbackAt = now;
     }
     function bindGameVoiceControls() {
@@ -2822,6 +2825,28 @@ function kidzoEmbeddedURL(path){
       const talking = activeGameUtterance || activeStoryUtterance;
       return (key === "roll" || key === "train-roll" ? .30 : .42) * (talking ? .38 : 1);
     }
+    function primeTrainAudio() {
+      if (state.route !== "play-m01" || !state.settings.sfxEnabled) return;
+      for (const key of ["whistle","roll","train-start","train-stop","correct","retry","complete","star"]) {
+        try {
+          const player = audioCache[key] || (audioCache[key] = new Audio(SFX_MANIFEST[key]));
+          if (player.kidzoPrimed || player.kidzoPriming) continue;
+          player.kidzoPriming = true;
+          const ticket = player.kidzoPlayTicket || 0;
+          player.muted = true; player.volume = 0;
+          const pending = player.play();
+          const finish = () => {
+            player.kidzoPriming = false; player.kidzoPrimed = true;
+            if ((player.kidzoPlayTicket || 0) === ticket) { player.pause(); player.currentTime = 0; player.muted = false; }
+          };
+          if (pending) pending.then(finish).catch(() => { player.kidzoPriming = false; player.muted = false; });
+          else finish();
+        } catch (_) {}
+      }
+    }
+    document.addEventListener("pointerdown", primeTrainAudio, { passive: true });
+    document.addEventListener("touchend", primeTrainAudio, { passive: true });
+    document.addEventListener("keydown", primeTrainAudio);
     function playSfx(key) {
       gameVoiceFeedback(key);
       if (key === "correct" && ["play-r02","play-m03"].includes(state.route)) playSfx("trace-done");
@@ -2830,6 +2855,7 @@ function kidzoEmbeddedURL(path){
       if (now - (lastEffectAt[key] || 0) < 95) return false;
       lastEffectAt[key] = now;
       unlockSfx();
+      if (state.route === "play-m01") return playSfxFile(key);
       const epoch = sfxEpoch, route = state.route, ticket = sfxKeyEpoch[key] || 0;
       const valid = () => state.settings.sfxEnabled && sfxEpoch === epoch && state.route === route && (sfxKeyEpoch[key] || 0) === ticket;
       const schedule = buffer => {
@@ -2857,7 +2883,10 @@ function kidzoEmbeddedURL(path){
       try {
         if (!audioCache[key]) audioCache[key] = new Audio(SFX_MANIFEST[key]);
         const player = audioCache[key];
-        player.volume = effectVolume(key); player.currentTime = 0;
+        player.kidzoPlayTicket = (player.kidzoPlayTicket || 0) + 1;
+        player.muted = false;
+        player.volume = state.route === "play-m01" ? (activeGameUtterance ? .42 : .65) : effectVolume(key);
+        player.currentTime = 0;
         const pending = player.play();
         if (pending) pending.catch(() => {
           gameVoiceStatus(state.lang === "bm" ? "Bunyi belum dapat dimainkan. Semak SFX dan cuba lagi." : "Could not play the sound. Check SFX and try again.");
