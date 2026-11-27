@@ -5133,7 +5133,6 @@ function changeStoryPage(delta){if(state.route!=='read-story'||state.reader.load
     };
 
     function renderHome(t) {
-      const m01Stars = state.progress.games["M01"]?.starsEarned || 0;
       const storiesDone=STORYBOOKS.filter(b=>b.ready&&state.progress.stories[b.id]?.completed).length;const storiesReady=STORYBOOKS.filter(b=>b.ready).length;
 
       return `
@@ -5165,16 +5164,6 @@ function changeStoryPage(delta){if(state.route!=='read-story'||state.reader.load
         </section>
 
         <section class="home-stack" aria-label="Learning Worlds">
-          <button class="world-card featured-banner" type="button" id="btnFeaturedTrain">
-            <div class="world-badge">123</div>
-            <div class="world-info">
-              <h2>${t.featuredTitle}</h2>
-              <p>${t.featuredSub}</p>
-              <span class="world-meta-pill">${t.starsLabel}: ${m01Stars} / 5</span>
-            </div>
-            <div class="world-arrow" aria-hidden="true">&#8250;</div>
-          </button>
-
           <button class="world-card world-reading" type="button" data-open-world="reading">
             <div class="world-badge">ABC</div>
             <div class="world-info">
@@ -5217,10 +5206,6 @@ function changeStoryPage(delta){if(state.route!=='read-story'||state.reader.load
           </button>
         </section>
 
-        <button class="cta-primary" type="button" id="btnMainLetsPlay">
-          <span>${t.letsPlay}</span>
-          <span aria-hidden="true">&#8250;</span>
-        </button>
       `;
     }
 
@@ -6193,8 +6178,6 @@ function bindStoryBatchControls(){const retry=document.getElementById('btnStoryR
       const btnFeatured = document.getElementById("btnFeaturedTrain");
       if (btnFeatured) btnFeatured.onclick = () => startNumberTrain("easy");
 
-      const btnMainLetsPlay = document.getElementById("btnMainLetsPlay");
-      if (btnMainLetsPlay) btnMainLetsPlay.onclick = () => startNumberTrain("easy");
 
       const btnOpenStories = document.getElementById("btnOpenStories");
       if (btnOpenStories) btnOpenStories.onclick = () => navigateTo("stories");
