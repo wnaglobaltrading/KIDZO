@@ -2185,11 +2185,17 @@ body.d10-theme{background:linear-gradient(135deg,#b9ecde,#ffdc87 48%,#dfc0f4)}.s
 
 
 /* R04 cheerful sky and D04 colour learning. */
-body.r04-theme{background:linear-gradient(140deg,#b8e8ff 0%,#e1ceff 48%,#ffcfe0 100%)!important}
-.r04-theme .mystery-panel{background:#fffafeee!important;border-color:#b99ce4!important}
-.r04-theme .mystery-stage{background:radial-gradient(ellipse at 12% 15%,#fff6a9 0,transparent 32%),radial-gradient(ellipse at 90% 82%,#ffc5df 0,transparent 36%),linear-gradient(135deg,#def4ff,#eae1ff 65%,#fff0da)!important;border-color:#aa9cde!important}
-.r04-theme .mystery-canopy i:nth-child(1){background:#ffb7db!important}.r04-theme .mystery-canopy i:nth-child(2){background:#ffe77d!important}.r04-theme .mystery-canopy i:nth-child(3){background:#a4dcff!important}.r04-theme .mystery-canopy i:nth-child(4){background:#c5a5f1!important}
-.r04-theme .mystery-heading,.r04-theme .mystery-heading h3{color:#574381!important}
+body.r04-theme{background:#07152e!important}
+.r04-theme .mystery-panel{background:#101f3fee!important;border-color:#809ad0!important;color:#fff!important}
+.r04-theme .mystery-stage{background:#081b3a url('kidzo-r04-night.webp') center top/100% auto no-repeat!important;border-color:#809ad0!important;padding-top:clamp(135px,17vw,235px)}
+.r04-theme .mystery-canopy{display:none}
+.r04-theme .mystery-heading,.r04-theme .mystery-heading h3,.r04-theme .mystery-heading>span,.r04-theme .mystery-heading p,.r04-theme .mystery-score,.r04-theme .mystery-voice-note,.r04-theme .mystery-win{color:#fff!important;text-shadow:0 2px 4px #000}
+.r04-theme .mystery-heading{background:#081b3acc;border-radius:18px;padding:10px}
+.r04-theme .mystery-letter{color:#172344!important;text-shadow:none!important}
+.r04-theme .mystery-feedback{background:#07152ef2;color:#fff;border-color:#95b9ef}
+.r04-theme .mystery-mode button{background:#19335f;color:#fff;border-color:#95b9ef}
+.r04-theme .mystery-mode button[aria-pressed="true"]{background:#dceaff;color:#172344}
+
 .color-mode-tabs{display:flex;gap:9px;flex-wrap:wrap;justify-content:center;margin:0 0 18px}.color-mode-tabs button{min-height:48px}
 .color-learn-question{text-align:center;font-size:clamp(1.5rem,4vw,2.1rem);color:#593877;margin:22px 0}
 .color-learn-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;max-width:650px;margin:20px auto}
@@ -4239,13 +4245,13 @@ function kidzoEmbeddedURL(path){
         voiceNote:"Device voice · English letter names",voiceMissing:"No English voice was found. Check your device speech settings.",
         upper:"Big letters",lower:"Little letters",choose:"Choose letter",done:"Forest explorer!"},
       bm:{title:"Bunyi Huruf Misteri",eyebrow:"KIDZO · HUTAN KELIP-KELIP",sub:"Dengar bunyinya. Cari hurufnya.",
-        intro:"Dengar nama huruf dalam English, kemudian cari tanglungnya.",before:"Tekan pembesar suara dahulu. Huruf apakah yang akan disebut?",
+        intro:"Dengar nama huruf, kemudian cari tanglungnya.",before:"Tekan pembesar suara dahulu. Huruf apakah yang akan disebut?",
         listen:"Dengar",again:"Dengar lagi",listening:"Dengar dengan teliti…",ready:"Huruf apa yang disebut tadi? Pilih tanglungnya.",
         retry:"Boleh dengar sekali lagi. Cuba tanglung lain!",correct:"Jumpa! Hutan semakin bercahaya.",
         finish:"Lima huruf berjaya ditemui. Hutan sudah bercahaya!",round:"Penemuan",next:"Bunyi seterusnya",replay:"Main lagi",
         unsupported:"Audio huruf tidak tersedia dalam pelayar ini. Cuba Safari atau Chrome yang menyokong suara peranti.",
         audioError:"Suara belum dapat dimainkan. Semak kelantangan peranti dan tekan Dengar lagi.",
-        voiceNote:"Suara peranti · Nama huruf English",voiceMissing:"Suara English belum ditemui. Semak tetapan suara peranti.",
+        voiceNote:"Suara peranti · Nama huruf Bahasa Melayu",voiceMissing:"Suara Bahasa Melayu belum ditemui. Semak tetapan suara peranti.",
         upper:"Huruf besar",lower:"Huruf kecil",choose:"Pilih huruf",done:"Penjelajah hutan!"}
     };
     let mysteryUtterance=null;
@@ -4275,20 +4281,22 @@ function kidzoEmbeddedURL(path){
       if(!("speechSynthesis" in window)||typeof SpeechSynthesisUtterance==="undefined"){
         game.status="unsupported";render();return;
       }
-      const serial=++mysterySpeechSerial,index=game.index;
-      const current=()=>state.route==="play-r04"&&state.mystery===game&&game.index===index&&mysterySpeechSerial===serial;
+      const serial=++mysterySpeechSerial,index=game.index,language=state.lang;
+      const current=()=>state.route==="play-r04"&&state.mystery===game&&game.index===index&&state.lang===language&&mysterySpeechSerial===serial;
       try{
         const synth=window.speechSynthesis;
         // A full phrase makes the isolated capital A a letter name rather than an article.
-        const utter=new SpeechSynthesisUtterance("The letter "+round.target+".");
+        const locale=language==="bm"?"ms-MY":"en-US";
+        const utter=new SpeechSynthesisUtterance((language==="bm"?"Huruf ":"The letter ")+round.target+".");
         const voices=synth.getVoices? synth.getVoices():[];
-        const english=voices.filter(v=>/^en(?:-|_)/i.test(v.lang));
-        const preferred=/female|woman|samantha|zira|aria|jenny|susan|sara|hazel/i;
-        const voice=english.find(v=>v.voiceURI===gameVoiceURIs["en-US"])||english.find(v=>/^en[-_]US$/i.test(v.lang)&&preferred.test(v.name))||english.find(v=>preferred.test(v.name))||english.find(v=>/^en[-_]US$/i.test(v.lang))||english[0];
-        if(voice)gameVoiceURIs["en-US"]=voice.voiceURI;
+        const matching=voices.filter(v=>v.lang.toLowerCase().replace("_","-").startsWith(locale.slice(0,2)+"-"));
+        const preferred=/female|woman|samantha|zira|aria|jenny|susan|sara|hazel|yasmin/i;
+        const exact=v=>v.lang.toLowerCase().replace("_","-")===locale.toLowerCase();
+        const voice=matching.find(v=>v.voiceURI===gameVoiceURIs[locale])||matching.find(v=>exact(v)&&preferred.test(v.name))||matching.find(v=>preferred.test(v.name))||matching.find(exact)||matching[0];
+        if(voice)gameVoiceURIs[locale]=voice.voiceURI;
         if(voices.length&&!voice){game.status="voiceMissing";render();return;}
         if(voice)utter.voice=voice;
-        utter.lang=voice?.lang||"en-US";utter.rate=1;utter.pitch=1;utter.volume=1;
+        utter.lang=voice?.lang||locale;utter.rate=1;utter.pitch=1;utter.volume=1;
         mysteryUtterance=utter;game.speaking=true;game.status="listening";render();
         utter.onstart=()=>{
           if(!current())return;
@@ -6522,6 +6530,7 @@ function bindStoryBatchControls(){const retry=document.getElementById('btnStoryR
     // Language switch without corrupting active round or duplicating stars
     document.getElementById("langEnBtn").onclick = () => {
       state.lang = "en";
+      if(state.route==="play-r04"&&state.mystery){stopAllSpeechAndAudio();state.mystery.heard=false;if(!state.mystery.rounds[state.mystery.index].solved)state.mystery.status="before";}
       if (state.route === "play-m01" && !state.train.resolved) {
         state.train.feedbackMsg = UI_STRINGS.en.trainPrompt;
       } else if (state.route === "play-r01" && state.balloon.phase === "playing" && !state.balloon.resolved && state.balloon.feedbackType === "neutral") {
@@ -6534,6 +6543,7 @@ function bindStoryBatchControls(){const retry=document.getElementById('btnStoryR
 
     document.getElementById("langBmBtn").onclick = () => {
       state.lang = "bm";
+      if(state.route==="play-r04"&&state.mystery){stopAllSpeechAndAudio();state.mystery.heard=false;if(!state.mystery.rounds[state.mystery.index].solved)state.mystery.status="before";}
       if (state.route === "play-m01" && !state.train.resolved) {
         state.train.feedbackMsg = UI_STRINGS.bm.trainPrompt;
       } else if (state.route === "play-r01" && state.balloon.phase === "playing" && !state.balloon.resolved && state.balloon.feedbackType === "neutral") {
